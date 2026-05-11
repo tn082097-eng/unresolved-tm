@@ -364,14 +364,4 @@ This is more consistent with **deliberate curation across multiple Pentagon offi
 
 ---
 
-## H. RECOMMENDED FOLLOW-ON WORK
-
-1. **Cross-correlate D49 launch dates with D55's "possible missile" UAP report** (Latakia, Syria, Nov 2016) — does the timing align with any Vandenberg launches or known Russian launches catalogued in D49?
-2. **Re-verify all OCR'd numbers from JBIG2 files via pdftotext** — pdftotext extracts the embedded Adobe OCR layer which may differ from tesseract's output.
-3. **Run pdfimages -list on each file** to inventory embedded raster images (resolution, color mode, compression) — could reveal source-camera or scanner provenance.
-4. **Check for the public version of the same MDR releases** elsewhere (FOIA reading rooms, AARO website) — see if the Series 2 internal IDs (D27–D43) match the original MDR 26-0028 cover sheet.
-5. **D20 forensic priority** — the metadata error is unique. Worth checking if the original "Southern United States, 2020" document exists somewhere, and whether the file was repurposed.
-
----
-
-*Generated 2026-05-10 from forensic analysis session.*
+*Generated 2026-05-10 from forensic analysis session. Updated 2026-05-11 with subagent verification results: JBIG2 numeric integrity confirmed across all suspect values, D48/D49 confirmed as internal-only DoD reference material (not findable in any public archive), D20's separate Joint Staff MDR provenance identified, pdfimages inventory completed (JBIG2 count revised 14 → 10).*
