@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UAP Disclosure 2026 — A Forensic Anatomy</title>
+<meta name="description" content="A reader's anatomy of the May 8, 2026 Department of War UAP disclosure. 41 mission reports analyzed: hidden renumbering, four declassification cycles, two non-UAP documents, eight empty slots, and what the metadata reveals.">
+<meta name="author" content="duckjustice (with Claude as research assistant)">
+<meta name="theme-color" content="#0e0d0b">
+
+<!-- Open Graph / social sharing -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="What the Pentagon's UFO files actually say">
+<meta property="og:description" content="A reader's anatomy of the May 8, 2026 UAP disclosure. 41 mission reports, four MDR cycles, two non-UAP documents, and what the metadata reveals.">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What the Pentagon's UFO files actually say">
+<meta name="twitter:description" content="A reader's anatomy of the May 8, 2026 UAP disclosure. 41 mission reports, four MDR cycles, two non-UAP documents bundled in.">
+
+<!-- Inline SVG favicon — radar ping / amber dot on dark -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230e0d0b'/%3E%3Ccircle cx='32' cy='32' r='4' fill='%23e8a23a'/%3E%3Ccircle cx='32' cy='32' r='12' fill='none' stroke='%23e8a23a' stroke-width='1.5' opacity='0.5'/%3E%3Ccircle cx='32' cy='32' r='22' fill='none' stroke='%23e8a23a' stroke-width='1' opacity='0.25'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:        #0e0d0b;
+  --bg-2:      #15130f;
+  --surface:   #1a1815;
+  --surface-2: #221f1a;
+  --surface-3: #2c2823;
+  --border:    #383229;
+  --border-2:  #4a4239;
+  --fg:        #ebe6dc;
+  --fg-2:      #c4bdaa;
+  --muted:     #8a8170;
+  --muted-2:   #5b5448;
+  --amber:     #e8a23a;
+  --amber-hot: #ffb347;
+  --amber-dim: #7a5618;
+  --amber-bg:  #2a200d;
+  --red:       #d44b3e;
+  --red-bg:    #321612;
+  --blue:      #7ba0b8;
+  --green:     #6a8c5c;
+  --serif-d:   'Fraunces', Georgia, serif;
+  --serif-b:   'Newsreader', Georgia, serif;
+  --mono:      'JetBrains Mono', 'Courier New', monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--serif-b);
+  font-size: 17px; line-height: 1.62; font-weight: 380;
+  background: var(--bg); color: var(--fg);
+  font-feature-settings: "tnum" 0, "kern" 1;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+body::before {
+  content: ''; position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.85 0 0 0 0 0.7 0 0 0 0 0.4 0 0 0 0.025 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 1000;
+  mix-blend-mode: overlay; opacity: 0.7;
+}
+::selection { background: var(--amber); color: var(--bg); }
+
+header.hero {
+  position: relative; padding: 96px 32px 56px;
+  border-bottom: 1px solid var(--border);
+  background: radial-gradient(ellipse at 30% 0%, rgba(232,162,58,0.07), transparent 60%);
+  overflow: hidden;
+}
+header.hero::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--amber-dim), transparent);
+}
+.hero-inner { max-width: 1120px; margin: 0 auto; }
+.hero-stamp {
+  display: inline-block; font-family: var(--mono);
+  font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--amber); border: 1px solid var(--amber-dim);
+  padding: 5px 12px; border-radius: 2px; margin-bottom: 28px;
+  background: var(--amber-bg);
+}
+h1.hero-title {
+  font-family: var(--serif-d); font-weight: 350;
+  font-size: clamp(40px, 7.2vw, 92px); line-height: 0.96;
+  letter-spacing: -0.025em;
+  font-variation-settings: "opsz" 144, "SOFT" 30;
+  color: var(--fg); margin-bottom: 28px; max-width: 18ch;
+}
+h1.hero-title em {
+  font-style: italic; color: var(--amber);
+  font-variation-settings: "opsz" 144, "SOFT" 80;
+}
+.hero-deck {
+  font-family: var(--serif-b);
+  font-size: clamp(17px, 1.8vw, 21px); line-height: 1.52;
+  color: var(--fg-2); font-weight: 360;
+  max-width: 60ch; margin-bottom: 36px;
+}
+.hero-meta {
+  display: flex; gap: 36px; flex-wrap: wrap;
+  font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted);
+  border-top: 1px solid var(--border); padding-top: 20px;
+}
+.hero-meta span strong { color: var(--fg); font-weight: 500; }
+.hero-deck-plain {
+  font-family: var(--serif-b); font-style: italic;
+  font-size: clamp(15px, 1.5vw, 17.5px); line-height: 1.55;
+  color: var(--fg-2); font-weight: 360;
+  max-width: 60ch; margin-bottom: 32px;
+  border-left: 2px solid var(--amber-dim); padding: 4px 0 4px 16px;
+}
+.hero-cta {
+  display: inline-block; margin-top: 28px;
+  font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--amber);
+  text-decoration: none; padding: 10px 18px;
+  border: 1px solid var(--amber-dim); border-radius: 2px;
+  background: var(--amber-bg); transition: all .15s ease;
+}
+.hero-cta:hover { background: var(--amber); color: var(--bg); border-color: var(--amber); }
+
+/* PRIMER + GLOSSARY */
+.primer-intro {
+  font-family: var(--serif-b); font-size: 19px; line-height: 1.72;
+  color: var(--fg); max-width: 64ch; margin-bottom: 28px;
+}
+.primer-intro strong { color: var(--amber); font-weight: 540; }
+.primer-intro + .primer-intro { margin-top: -8px; }
+.primer-context {
+  background: var(--surface); border: 1px solid var(--border);
+  border-left: 3px solid var(--amber); padding: 24px 28px;
+  margin: 32px 0;
+}
+.primer-context h4 {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--amber);
+  margin-bottom: 14px;
+}
+.primer-context p {
+  font-family: var(--serif-b); color: var(--fg-2);
+  font-size: 16.5px; line-height: 1.62; margin-bottom: 10px;
+  max-width: 62ch;
+}
+.primer-context p:last-child { margin-bottom: 0; }
+.primer-context strong { color: var(--fg); font-weight: 540; }
+
+.how-to-use {
+  background: var(--bg-2); border: 1px dashed var(--amber-dim);
+  padding: 22px 26px; margin: 28px 0 32px;
+}
+.how-to-use h4 {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--amber);
+  margin-bottom: 14px;
+}
+.how-to-use ul {
+  list-style: none; padding: 0; display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px 24px;
+}
+.how-to-use li {
+  font-family: var(--serif-b); font-size: 15px; line-height: 1.5;
+  color: var(--fg-2); padding-left: 18px; position: relative;
+}
+.how-to-use li::before {
+  content: '→'; position: absolute; left: 0; top: 0;
+  color: var(--amber); font-family: var(--mono); font-size: 13px;
+}
+.how-to-use li strong { color: var(--fg); font-weight: 540; }
+
+.glossary {
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 28px 32px; margin: 32px 0 8px;
+}
+.glossary h4 {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--amber);
+  margin-bottom: 18px; padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.glossary-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px 32px;
+}
+.gloss-term {
+  font-family: var(--mono); font-size: 13px; font-weight: 500;
+  color: var(--amber); letter-spacing: 0.04em;
+  margin-bottom: 3px;
+}
+.gloss-term .full {
+  font-family: var(--serif-b); font-style: italic;
+  font-weight: 400; color: var(--fg-2); letter-spacing: 0;
+  margin-left: 8px; font-size: 13.5px;
+}
+.gloss-def {
+  font-family: var(--serif-b); font-size: 15px; line-height: 1.5;
+  color: var(--fg-2);
+}
+.gloss-def strong { color: var(--fg); }
+@media (max-width: 800px) {
+  .glossary { padding: 20px 22px; }
+  .glossary-grid { grid-template-columns: 1fr; }
+}
+
+/* PLAIN-ENGLISH CALLOUT inside findings */
+.plain-callout {
+  margin-top: 16px; padding: 14px 18px;
+  background: var(--bg-2); border-left: 2px solid var(--amber);
+  border-radius: 0 2px 2px 0;
+}
+.plain-callout .label {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--amber);
+  margin-bottom: 6px; display: block;
+}
+.plain-callout p {
+  font-family: var(--serif-b); font-style: italic;
+  color: var(--fg); font-size: 15.5px; line-height: 1.55;
+  max-width: none;
+}
+.plain-callout p strong { color: var(--amber); font-style: normal; font-weight: 540; }
+
+nav.toc {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(14,13,11,0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.toc-inner {
+  max-width: 1120px; margin: 0 auto;
+  padding: 14px 32px; display: flex; gap: 4px;
+  overflow-x: auto; scrollbar-width: thin;
+}
+.toc a {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--muted); text-decoration: none;
+  padding: 8px 14px; border-radius: 2px; white-space: nowrap;
+  transition: all .15s ease; flex-shrink: 0;
+}
+.toc a:hover { color: var(--amber); background: var(--amber-bg); }
+.toc a.active { color: var(--amber); background: var(--amber-bg); }
+
+main { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+section { padding: 80px 0; border-bottom: 1px solid var(--border); }
+section:last-child { border-bottom: none; }
+
+.section-head {
+  display: grid; grid-template-columns: 180px 1fr;
+  gap: 32px; margin-bottom: 48px; align-items: start;
+}
+.section-num {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--amber); padding-top: 14px;
+}
+.section-num::before {
+  content: ''; display: inline-block; width: 24px; height: 1px;
+  background: var(--amber-dim); vertical-align: middle; margin-right: 12px;
+}
+.section-title {
+  font-family: var(--serif-d); font-weight: 380;
+  font-size: clamp(32px, 4.2vw, 52px); line-height: 1.04; letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 72, "SOFT" 40;
+  color: var(--fg); max-width: 18ch;
+}
+.section-title em {
+  font-style: italic; color: var(--amber);
+  font-variation-settings: "opsz" 72, "SOFT" 80;
+}
+
+.section-body { display: grid; grid-template-columns: 180px 1fr; gap: 32px; align-items: start; }
+.section-marginalia {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+  color: var(--muted); line-height: 1.6;
+  border-top: 1px solid var(--border); padding-top: 14px;
+}
+.section-marginalia strong { color: var(--fg-2); font-weight: 500; }
+.section-content > p {
+  font-size: 18px; line-height: 1.7; margin-bottom: 18px;
+  max-width: 64ch; color: var(--fg-2);
+}
+.section-content > p strong { color: var(--fg); font-weight: 540; }
+.section-content > p em { color: var(--amber); font-style: italic; }
+
+@media (max-width: 800px) {
+  .section-head, .section-body { grid-template-columns: 1fr; }
+  .section-marginalia { border-top: none; border-left: 2px solid var(--amber-dim); padding: 0 0 0 16px; margin-bottom: 24px; }
+}
+
+.stats-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1px; background: var(--border); border: 1px solid var(--border);
+  margin: 32px 0 8px;
+}
+.stat { background: var(--surface); padding: 28px 24px; position: relative; }
+.stat-num {
+  font-family: var(--serif-d); font-size: 56px; line-height: 1; font-weight: 320;
+  font-variation-settings: "opsz" 144, "SOFT" 50;
+  color: var(--amber); letter-spacing: -0.04em;
+  margin-bottom: 12px; font-feature-settings: "tnum" 1;
+}
+.stat-label {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--muted); line-height: 1.5;
+}
+.stat-label .accent-red { color: var(--red); }
+.stat-label .accent-blue { color: var(--blue); }
+
+.findings-stack { display: grid; gap: 24px; margin: 28px 0; }
+.finding {
+  background: var(--surface); border: 1px solid var(--border);
+  border-left: 3px solid var(--amber); padding: 28px 32px; position: relative;
+}
+.finding.alert { border-left-color: var(--red); }
+.finding.note { border-left-color: var(--blue); }
+.finding-num {
+  position: absolute; top: 24px; right: 28px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; color: var(--muted-2);
+}
+.finding h3 {
+  font-family: var(--serif-d); font-weight: 420; font-size: 26px;
+  line-height: 1.18; letter-spacing: -0.012em;
+  font-variation-settings: "opsz" 48, "SOFT" 30;
+  color: var(--fg); margin-bottom: 12px; max-width: 38ch;
+}
+.finding h3 em { color: var(--amber); font-style: italic; }
+.finding p { color: var(--fg-2); font-size: 16.5px; line-height: 1.62; max-width: 64ch; }
+.finding p + p { margin-top: 10px; }
+.finding code {
+  font-family: var(--mono); font-size: 13px; background: var(--surface-3);
+  padding: 1px 6px; border-radius: 2px; color: var(--amber); letter-spacing: 0;
+}
+
+.renumber-viz {
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 36px; position: relative; margin-top: 28px;
+}
+.renumber-cols { display: grid; grid-template-columns: 1fr 80px 1fr; gap: 0; align-items: start; }
+.renumber-col h4 {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--amber);
+  margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border);
+}
+.renumber-col h4 small { color: var(--muted); margin-left: 8px; letter-spacing: 0.08em; }
+.renumber-row {
+  font-family: var(--mono); font-size: 13px;
+  padding: 6px 10px; display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid var(--border); color: var(--fg-2);
+  cursor: pointer; transition: background .12s;
+}
+.renumber-row:last-child { border-bottom: none; }
+.renumber-row:hover { background: var(--surface-3); color: var(--fg); }
+.renumber-row.collision { color: var(--red); background: var(--red-bg); }
+.renumber-row.collision::after { content: '⚠'; margin-left: 6px; }
+.renumber-row .filename { color: var(--muted); font-size: 11px; margin-left: 8px; }
+.renumber-link {
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 2px; padding-top: 50px;
+}
+.renumber-arrow {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;
+  color: var(--amber); writing-mode: vertical-rl; transform: rotate(180deg);
+  text-transform: uppercase; padding: 8px 0;
+  border-left: 1px dashed var(--amber-dim); border-right: 1px dashed var(--amber-dim);
+}
+@media (max-width: 800px) {
+  .renumber-cols { grid-template-columns: 1fr; gap: 24px; }
+  .renumber-link { padding: 8px 0; }
+  .renumber-arrow { writing-mode: horizontal-tb; transform: none; border: none; border-top: 1px dashed var(--amber-dim); border-bottom: 1px dashed var(--amber-dim); padding: 8px; text-align: center; }
+}
+
+.gap-legend {
+  display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 24px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted);
+}
+.gap-legend span { display: flex; align-items: center; gap: 8px; }
+.gap-legend .swatch {
+  width: 14px; height: 14px; border-radius: 2px; border: 1px solid var(--border);
+}
+.gap-grid {
+  display: grid; grid-template-columns: repeat(15, 1fr); gap: 4px;
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 20px; margin-bottom: 24px;
+}
+.gap-cell {
+  aspect-ratio: 1; background: var(--surface-3);
+  border: 1px solid var(--border); border-radius: 2px;
+  position: relative; cursor: default; display: flex;
+  align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 10px; color: var(--muted-2);
+  transition: transform .12s, border-color .12s;
+}
+.gap-cell.uap {
+  background: var(--amber); color: var(--bg);
+  border-color: var(--amber-hot); font-weight: 500;
+}
+.gap-cell.uap:hover { transform: scale(1.15); z-index: 10; border-color: #fff; }
+.gap-cell.nonuap {
+  background: transparent; border-color: var(--amber);
+  color: var(--amber); font-weight: 500;
+}
+.gap-cell.nonuap:hover { transform: scale(1.15); z-index: 10; background: var(--amber-bg); }
+.gap-cell.gap {
+  background: repeating-linear-gradient(45deg, var(--surface) 0 4px, transparent 4px 8px);
+  color: transparent;
+}
+.gap-cell.reserved-block { background: var(--red-bg); border-color: var(--red); color: var(--red); }
+.gap-cell.reserved-block:hover { transform: scale(1.15); z-index: 10; }
+.gap-tooltip {
+  position: fixed; background: var(--bg-2);
+  border: 1px solid var(--amber); padding: 10px 14px;
+  font-family: var(--mono); font-size: 12px; color: var(--fg);
+  pointer-events: none; opacity: 0; transition: opacity .15s;
+  z-index: 200; max-width: 280px; line-height: 1.5;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+.gap-tooltip strong {
+  color: var(--amber); display: block; margin-bottom: 4px;
+  letter-spacing: 0.1em; text-transform: uppercase; font-size: 10px;
+}
+.gap-tooltip.active { opacity: 1; }
+
+.filters {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;
+  padding: 20px 24px; background: var(--surface); border: 1px solid var(--border);
+}
+.filter-group { display: flex; align-items: center; gap: 8px; }
+.filter-label {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--muted); margin-right: 4px;
+}
+.chip {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--fg-2); background: transparent;
+  border: 1px solid var(--border-2); padding: 6px 12px;
+  border-radius: 2px; cursor: pointer; transition: all .12s;
+}
+.chip:hover { color: var(--amber); border-color: var(--amber-dim); }
+.chip.active { color: var(--bg); background: var(--amber); border-color: var(--amber); }
+.search-input {
+  flex: 1; min-width: 200px;
+  font-family: var(--mono); font-size: 12px;
+  background: var(--bg); border: 1px solid var(--border-2);
+  color: var(--fg); padding: 7px 12px; border-radius: 2px;
+  outline: none; transition: border-color .15s;
+}
+.search-input:focus { border-color: var(--amber); }
+.search-input::placeholder { color: var(--muted-2); letter-spacing: 0.08em; }
+
+.explorer {
+  border: 1px solid var(--border); background: var(--surface); overflow: hidden;
+}
+.explorer-header {
+  display: grid;
+  grid-template-columns: 70px 110px 1.4fr 1fr 0.8fr 0.9fr 26px;
+  padding: 14px 20px; background: var(--bg-2);
+  border-bottom: 1px solid var(--border);
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--muted);
+  gap: 14px; align-items: center;
+}
+.explorer-header span.sortable { cursor: pointer; user-select: none; }
+.explorer-header span.sortable:hover { color: var(--amber); }
+.explorer-header span.sorted { color: var(--amber); }
+.explorer-row {
+  display: grid;
+  grid-template-columns: 70px 110px 1.4fr 1fr 0.8fr 0.9fr 26px;
+  padding: 14px 20px; border-bottom: 1px solid var(--border);
+  gap: 14px; align-items: center; cursor: pointer; transition: background .1s;
+}
+.explorer-row:hover { background: var(--surface-2); }
+.explorer-row.expanded { background: var(--surface-2); }
+.row-id {
+  font-family: var(--mono); font-size: 14px; font-weight: 500;
+  color: var(--amber); letter-spacing: 0.04em;
+}
+.row-id.non-uap { color: var(--blue); }
+.row-id.alert::after { content: ' ⚠'; color: var(--red); }
+.row-date {
+  font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.04em;
+}
+.row-loc { font-size: 14px; color: var(--fg); line-height: 1.4; }
+.row-loc .err {
+  display: block; font-size: 10.5px; color: var(--red);
+  font-family: var(--mono); letter-spacing: 0.06em; margin-top: 2px;
+}
+.row-sensor, .row-aircraft {
+  font-family: var(--mono); font-size: 11px; color: var(--fg-2); letter-spacing: 0.04em;
+}
+.row-aircraft { font-size: 12.5px; }
+.row-tag {
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.12em;
+  text-transform: uppercase; padding: 3px 8px; border-radius: 2px;
+  display: inline-block; font-weight: 500;
+}
+.row-chevron { font-family: var(--mono); color: var(--muted); transition: transform .2s; text-align: right; }
+.explorer-row.expanded .row-chevron { transform: rotate(90deg); color: var(--amber); }
+
+.tag-PROSAIC    { background: #2e2715; color: var(--amber); }
+.tag-ARTIFACT   { background: #1f2a18; color: var(--green); }
+.tag-UNRESOLVED { background: var(--surface-3); color: var(--fg-2); }
+.tag-CRITICAL   { background: var(--red-bg); color: var(--red); }
+.tag-SINGLE     { background: #142028; color: var(--blue); }
+.tag-DOUBT      { background: #251a2c; color: #a987c4; }
+.tag-BENIGN     { background: #1a2419; color: #7a9f6e; }
+.tag-MISSILE    { background: #2a1a16; color: #d18a6a; }
+.tag-BRIEF      { background: var(--surface-3); color: var(--muted); }
+.tag-NONUAP     { background: #14202a; color: var(--blue); }
+
+.row-detail {
+  display: none; padding: 24px 20px;
+  border-top: 1px solid var(--border); background: var(--bg-2);
+  grid-template-columns: 1fr 1fr; gap: 32px; font-size: 14px;
+}
+.row-detail.open { display: grid; }
+.detail-block h5 {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--amber);
+  margin-bottom: 10px; border-bottom: 1px solid var(--border); padding-bottom: 6px;
+}
+.detail-block .quote {
+  font-family: var(--serif-b); font-style: italic;
+  color: var(--fg-2); font-size: 14.5px; line-height: 1.62;
+  border-left: 2px solid var(--amber); padding: 4px 0 4px 14px; margin-bottom: 12px;
+}
+.detail-meta {
+  font-family: var(--mono); font-size: 11.5px;
+  color: var(--fg-2); line-height: 1.85; letter-spacing: 0.02em;
+}
+.detail-meta .row { display: block; }
+.detail-meta .key { color: var(--muted); }
+.detail-meta .val { color: var(--fg-2); }
+.detail-meta .val.alert { color: var(--red); }
+.detail-flags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.flag-pill {
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.1em;
+  text-transform: uppercase; padding: 3px 8px;
+  border: 1px solid var(--border-2); border-radius: 2px; color: var(--muted);
+}
+.flag-pill.warn { color: var(--amber); border-color: var(--amber-dim); }
+.flag-pill.bad  { color: var(--red); border-color: var(--red); background: var(--red-bg); }
+
+@media (max-width: 900px) {
+  .explorer-header { display: none; }
+  .explorer-row { grid-template-columns: 70px 1fr 26px; gap: 12px; }
+  .row-date, .row-sensor, .row-aircraft, .row-flags { display: none; }
+  .row-detail { grid-template-columns: 1fr; }
+}
+
+.timeline-wrap {
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 32px; margin-top: 28px; overflow-x: auto;
+}
+.timeline { position: relative; min-width: 800px; padding: 50px 0 40px; }
+.timeline-axis { position: relative; height: 1px; background: var(--border-2); }
+.tl-year {
+  position: absolute; top: -22px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+  color: var(--muted); transform: translateX(-50%);
+}
+.tl-year::after {
+  content: ''; display: block; width: 1px; height: 6px;
+  background: var(--border-2); margin: 4px auto 0;
+}
+.tl-lane { position: relative; height: 32px; margin-top: 14px; }
+.tl-lane-label {
+  position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted);
+}
+.tl-event {
+  position: absolute; top: 50%; transform: translate(-50%, -50%);
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--amber); border: 2px solid var(--bg);
+  cursor: pointer; transition: transform .15s;
+}
+.tl-event:hover { transform: translate(-50%, -50%) scale(1.6); z-index: 10; }
+.tl-event.nonuap { background: var(--blue); }
+.tl-event.batch { background: var(--red); width: 12px; height: 12px; }
+.tl-bar {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  height: 4px; background: var(--blue); opacity: 0.5; border-radius: 1px;
+}
+
+.tech-list { margin-top: 28px; }
+.tech-item {
+  display: grid; grid-template-columns: 60px 1fr;
+  gap: 24px; padding: 28px 0;
+  border-top: 1px solid var(--border); align-items: start;
+}
+.tech-item:last-child { border-bottom: 1px solid var(--border); }
+.tech-num {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em;
+  color: var(--amber); padding-top: 4px;
+}
+.tech-body h4 {
+  font-family: var(--serif-d); font-weight: 460; font-size: 22px;
+  line-height: 1.2; letter-spacing: -0.01em;
+  font-variation-settings: "opsz" 36, "SOFT" 40;
+  color: var(--fg); margin-bottom: 10px; max-width: 42ch;
+}
+.tech-body p { color: var(--fg-2); line-height: 1.65; font-size: 16px; max-width: 64ch; }
+.tech-body code {
+  font-family: var(--mono); font-size: 13px; background: var(--surface-3);
+  padding: 1px 6px; border-radius: 2px; color: var(--amber);
+}
+.tech-body strong { color: var(--fg); font-weight: 540; }
+
+.conclusion-body { max-width: 64ch; margin: 0 auto; padding: 0 16px; }
+.conclusion-body p {
+  font-size: 19px; line-height: 1.7; margin-bottom: 22px; color: var(--fg-2);
+}
+.conclusion-body p:first-of-type::first-letter {
+  font-family: var(--serif-d); font-size: 88px; font-weight: 320;
+  font-variation-settings: "opsz" 144, "SOFT" 30;
+  color: var(--amber); float: left; line-height: 0.85; padding: 8px 14px 0 0;
+}
+.conclusion-body strong { color: var(--fg); }
+.conclusion-body em { color: var(--amber); font-style: italic; }
+
+footer {
+  padding: 60px 32px 80px; border-top: 1px solid var(--border);
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted);
+  text-align: center; background: var(--bg-2);
+}
+footer a { color: var(--amber); text-decoration: none; }
+footer a:hover { color: var(--amber-hot); }
+.footer-sources {
+  margin-top: 24px; display: flex; gap: 24px;
+  justify-content: center; flex-wrap: wrap; font-size: 10px;
+}
+
+/* PRINT STYLESHEET — readable as PDF or paper */
+@media print {
+  body { background: #fff !important; color: #000 !important; font-size: 11pt; }
+  body::before { display: none !important; }
+  header.hero { background: none; padding: 24px 0; border-bottom: 2px solid #000; }
+  .hero-title, .section-title, .finding h3, .tech-body h4 { color: #000 !important; }
+  .hero-title em, .section-title em, .finding h3 em, .tech-body h4 em { color: #b8761a !important; }
+  .hero-stamp, .hero-cta, nav.toc, .stat-num { color: #b8761a !important; }
+  nav.toc { position: static; border-bottom: 1px solid #000; }
+  .hero-deck, .hero-deck-plain, .primer-intro, p, .finding p, .tech-body p { color: #222 !important; }
+  .stat, .finding, .primer-context, .glossary, .how-to-use, .renumber-viz, .gap-grid, .timeline-wrap, .explorer, .tech-item, .plain-callout {
+    background: #fff !important; border-color: #999 !important; color: #000 !important;
+    page-break-inside: avoid;
+  }
+  .filters, .hero-cta { display: none; }
+  .explorer-row, .row-detail.open { background: #fff !important; display: grid !important; }
+  .row-chevron { display: none; }
+  section { page-break-before: auto; page-break-inside: auto; padding: 32px 0; }
+  a { color: #000 !important; text-decoration: underline; }
+  code { background: #f0f0f0 !important; color: #000 !important; }
+  .plain-callout { border-left-color: #b8761a !important; }
+  .gap-cell.uap { background: #b8761a !important; color: #fff !important; border-color: #b8761a !important; }
+  .gap-cell.reserved-block { background: #fbeaea !important; border-color: #b03020 !important; color: #b03020 !important; }
+  footer { background: none; border-color: #000; color: #555; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeUp 0.7s ease both; }
+.stat:nth-child(1) { animation-delay: 0.05s; }
+.stat:nth-child(2) { animation-delay: 0.12s; }
+.stat:nth-child(3) { animation-delay: 0.19s; }
+.stat:nth-child(4) { animation-delay: 0.26s; }
+.stat:nth-child(5) { animation-delay: 0.33s; }
+.stat:nth-child(6) { animation-delay: 0.40s; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-stamp">The May 8, 2026 UAP Disclosure · A reader's anatomy</div>
+    <h1 class="hero-title">What the Pentagon's <em>UFO files</em> actually say.</h1>
+    <p class="hero-deck">On May 8, 2026, the U.S. government published 161 declassified files about pilot encounters with unidentified objects. Most coverage focused on the videos. This page reads what's inside the <strong>41 mission reports</strong> that go with them — and finds a few things the official framing does not mention.</p>
+    <p class="hero-deck-plain">In plain words: real declassified documents, professionally handled, but two of the biggest aren't actually UFO reports, one mislabels its own location by half a world, four separate Pentagon declassification cycles were bundled into one publication, and eight numbered slots in the release were quietly left empty.</p>
+    <div class="hero-meta">
+      <span><strong>Published by</strong> Dept. of War · May 8, 2026</span>
+      <span><strong>Source files</strong> war.gov/UFO</span>
+      <span><strong>Files read</strong> 41 of 41</span>
+      <span><strong>This page updated</strong> May 11, 2026 · v1.1</span>
+    </div>
+    <a href="#primer" class="hero-cta">Start here — what this is, in plain English ↓</a>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#primer" class="active">00 Start Here</a>
+    <a href="#overview">01 By the Numbers</a>
+    <a href="#findings">02 Three Key Findings</a>
+    <a href="#renumbering">03 Hidden Renumbering</a>
+    <a href="#inventory">04 What's Missing</a>
+    <a href="#explorer">05 Every Report</a>
+    <a href="#timeline">06 Timeline</a>
+    <a href="#forensics">07 Technical Notes</a>
+    <a href="#conclusion">08 Bottom Line</a>
+  </div>
+</nav>
+
+<main>
+
+<section id="primer">
+  <div class="section-head">
+    <div class="section-num">§ 00 / Start Here</div>
+    <h2 class="section-title">What this is, <em>in plain English</em>.</h2>
+  </div>
+  <div class="section-body">
+    <div class="section-marginalia">
+      <strong>Who made this</strong><br>
+      An independent reader who downloaded the Pentagon's release, ran the files through standard PDF tools, and wrote down what they found. No insider access. No claim to extraordinary technology. Just careful reading of public documents.
+    </div>
+    <div class="section-content">
+      <p class="primer-intro">For decades, military pilots have filed reports when they see something in the sky they can't identify. Most of those reports stayed classified. On <strong>May 8, 2026</strong>, the U.S. government released a big batch of them to the public.</p>
+
+      <p class="primer-intro">The release came with a slick website at <em>war.gov/UFO</em>, dramatic music in the videos, and language describing every case as an <em>"Unresolved UAP"</em> (UAP = "Unidentified Anomalous Phenomena," the official replacement for "UFO"). The press ran with that framing.</p>
+
+      <p class="primer-intro">This page does something different: it reads the <strong>actual mission reports</strong> that go with the videos — the paperwork the pilots and intelligence operators filled out at the time. The reports tell a more complicated story than the headlines suggest.</p>
+
+      <div class="primer-context">
+        <h4>What you'll find on this page</h4>
+        <p><strong>Two of the biggest documents in the release aren't UFO reports at all.</strong> They're a 1996 study on rocket booster failures and a Vandenberg Air Force Base launch summary from 1958–2000. Hundreds of pages of space-launch reference material, bundled in with no UAP content whatsoever.</p>
+        <p><strong>One report has its location and year wrong on the title page.</strong> The file is labelled "Southern United States, 2020" but the contents are an F-16 fighter mission over <strong>Syria in March 2023</strong>. A reporter trusting the title would be off by half a planet and three years.</p>
+        <p><strong>At least four separate declassification batches were merged into one release.</strong> Two USCENTCOM cycles from this year (one of which uses hidden renumbering — files numbered D49–D75 in the release were actually D27–D43 internally), plus a third USCENTCOM cycle from the prior fiscal year, plus a separate Joint Staff cycle. Two of the four were completed months earlier and stockpiled for this publication date.</p>
+        <p><strong>Eight document slots in the middle (D66–D73) were left empty.</strong> Reserved for something that didn't make this release. Could be additional reports held back, or a future release. The metadata doesn't tell us which.</p>
+      </div>
+
+      <div class="how-to-use">
+        <h4>How this page works · <em>it's interactive</em></h4>
+        <ul>
+          <li><strong>Sticky menu</strong> at the top jumps you to any section.</li>
+          <li><strong>Click any report row</strong> in <em>Every Report</em> to expand the operator's exact words plus file metadata.</li>
+          <li><strong>Filter and search</strong> the explorer by location, tag, or any text.</li>
+          <li><strong>Sort columns</strong> by clicking any header (ID, date, location, sensor, assessment).</li>
+          <li><strong>Hover the grid</strong> in <em>What's Missing</em> to see what's at each slot.</li>
+          <li><strong>Hover timeline dots</strong> for date and event context.</li>
+        </ul>
+      </div>
+
+      <div class="glossary">
+        <h4>Glossary · <em>jargon you'll see below</em></h4>
+        <div class="glossary-grid">
+          <div>
+            <div class="gloss-term">UAP <span class="full">Unidentified Anomalous Phenomena</span></div>
+            <div class="gloss-def">The official term that replaced "UFO." Means anything in the sky (or sea) the military can't immediately identify — not necessarily extraterrestrial.</div>
+          </div>
+          <div>
+            <div class="gloss-term">MISREP <span class="full">Mission Report</span></div>
+            <div class="gloss-def">The standardized form a pilot or intel operator fills out after a flight. Most files in this release are MISREPs.</div>
+          </div>
+          <div>
+            <div class="gloss-term">AARO <span class="full">All-domain Anomaly Resolution Office</span></div>
+            <div class="gloss-def">The Pentagon office set up in 2022 to investigate UAP cases. They received the documents in this release.</div>
+          </div>
+          <div>
+            <div class="gloss-term">MDR <span class="full">Mandatory Declassification Review</span></div>
+            <div class="gloss-def">The legal process for un-classifying documents on request. The release is two MDR batches merged into one.</div>
+          </div>
+          <div>
+            <div class="gloss-term">USCENTCOM <span class="full">U.S. Central Command</span></div>
+            <div class="gloss-def">The military command responsible for the Middle East. Most reports in this release come from CENTCOM's area: Iraq, Syria, the Persian Gulf.</div>
+          </div>
+          <div>
+            <div class="gloss-term">Dept. of War (DoW) <span class="full">formerly Dept. of Defense</span></div>
+            <div class="gloss-def">Renamed by Trump in early 2026. The release was published under the new name. "DOW-UAP" is just the file prefix.</div>
+          </div>
+          <div>
+            <div class="gloss-term">Reaper / MQ-9 <span class="full">remotely-piloted drone</span></div>
+            <div class="gloss-def">The unmanned aircraft that recorded most of these sightings — it streams video back to ground operators in real time.</div>
+          </div>
+          <div>
+            <div class="gloss-term">ISR <span class="full">Intelligence, Surveillance, Reconnaissance</span></div>
+            <div class="gloss-def">The mission type for "go look at something and report back." Most UAP sightings in this release happened during routine ISR flights.</div>
+          </div>
+          <div>
+            <div class="gloss-term">FMV <span class="full">Full Motion Video</span></div>
+            <div class="gloss-def">The live video feed from the drone's camera. "Method of observation: FMV" means the operator saw it on screen, not out a window.</div>
+          </div>
+          <div>
+            <div class="gloss-term">FL (Flight Level) <span class="full">altitude</span></div>
+            <div class="gloss-def">Hundreds of feet above sea level. FL200 = 20,000 ft. FL600 = 60,000 ft (very high; spy-plane territory).</div>
+          </div>
+          <div>
+            <div class="gloss-term">JBIG2 <span class="full">image-compression format</span></div>
+            <div class="gloss-def">Used by office scanners to shrink black-and-white scans. Has a notorious bug where digits get swapped during compression (a "6" becomes an "8"). Affects 14 files here.</div>
+          </div>
+          <div>
+            <div class="gloss-term">xref table <span class="full">PDF's internal table of contents</span></div>
+            <div class="gloss-def">Every time a PDF is saved or modified, a new xref is added. Counting them tells you how many times the file was edited.</div>
+          </div>
+          <div>
+            <div class="gloss-term">OCG <span class="full">Optional Content Group</span></div>
+            <div class="gloss-def">PDF "layers" — like watermarks or headers that can be toggled on/off. Looked at as a possible redaction-hiding trick. Wasn't one.</div>
+          </div>
+          <div>
+            <div class="gloss-term">Series 1 / Series 2 <span class="full">our shorthand</span></div>
+            <div class="gloss-def">The two merged release batches. <strong>Series 1</strong> = the 24 files with continuous IDs matching their filenames. <strong>Series 2</strong> = the 17 files with renumbered IDs (the "hidden renumbering" finding).</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="overview">
+  <div class="section-head">
+    <div class="section-num">§ 01 / By the Numbers</div>
+    <h2 class="section-title">What was <em>actually</em> released.</h2>
+  </div>
+  <div class="section-body">
+    <div class="section-marginalia">
+      <strong>Release 01</strong><br>
+      Published May 8, 2026 by the renamed Department of War, in response to Trump's Feb 19, 2026 directive. Hosted on war.gov/UFO. 161 total files including PDFs, videos, and images.
+    </div>
+    <div class="section-content">
+      <p>The Department of War published a real declassification on May 8, 2026 — 161 files of FBI documents, mission reports, range-fouler debriefs, and operator video. The technical handling is professional. The metadata is scrubbed. The framing is mystery; the contents are mostly ordinary.</p>
+      <p>This artifact analyzes the <strong>41 DOW-UAP-D## mission-report PDFs</strong> that underlie the videos and slides. Below: the counts that fall out when you actually look.</p>
+      <div class="stats-grid">
+        <div class="stat fade-in"><div class="stat-num">41</div><div class="stat-label">Total Files in MISREP Batch</div></div>
+        <div class="stat fade-in"><div class="stat-num">39</div><div class="stat-label">Actual UAP Reports</div></div>
+        <div class="stat fade-in"><div class="stat-num">2</div><div class="stat-label">Non-UAP Reference Docs<br><span class="accent-blue">D48 · D49</span></div></div>
+        <div class="stat fade-in"><div class="stat-num">4+</div><div class="stat-label">Declassification Cycles<br>Bundled Into One Release</div></div>
+        <div class="stat fade-in"><div class="stat-num">8</div><div class="stat-label">Reserved Slots Left Empty<br><span class="accent-red">D66 – D73</span></div></div>
+        <div class="stat fade-in"><div class="stat-num">34</div><div class="stat-label">Missing Document Numbers<br>Across D1 – D75</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="findings">
+  <div class="section-head">
+    <div class="section-num">§ 02 / Headline Findings</div>
+    <h2 class="section-title">Three things <em>the filenames</em> don't say.</h2>
+  </div>
+  <div class="section-body">
+    <div class="section-marginalia">
+      <strong>Method</strong><br>
+      Every PDF inspected via pdfinfo, exiftool, and qpdf. Title/Subject metadata compared against filename and rendered content. xref-revision counts and ModDate clustering used to identify processing batches.
+    </div>
+    <div class="section-content">
+      <div class="findings-stack">
+
+        <div class="finding alert">
+          <div class="finding-num">01 / KEY FINDING</div>
+          <h3>Two of the largest documents <em>aren't UAP reports</em>.</h3>
+          <p><code>D48</code> (181 pages, 22 MB) is RTI Report 5180/77-43F: <em>"Modeling Unlikely Space-Booster Failures in Risk Calculations,"</em> a 1996 contractor study for Vandenberg and Patrick AFB on Atlas / Titan / Delta booster reliability.</p>
+          <p><code>D49</code> (113 pages, 9 MB) is the 30th Space Wing's Vandenberg AFB Launch Summary, 1958–2000.</p>
+          <p>Together: <strong>294 pages of space-launch reference material with zero UAP mentions, no USCENTCOM declassification stamps</strong>, and a 16-year temporal gap between D49's last entry (Feb 2000) and the earliest UAP report in this corpus (D55, Nov 2016).</p>
+          <p>A follow-up search of DTIC, RTI International's archives, NASA NTRS, archive.org, AARO's Volume 1 bibliography, and Google Books found <strong>no public version of either document anywhere</strong>. D48 carries a Distribution Statement B/C marking, meaning it was never intended for public release. The closest public Vandenberg launch history (archive.org) ends in 1996, not Feb 2000 — different document. <strong>Both D48 and D49 appear to be internal-distribution DoD reference material that the public has never seen before this release.</strong></p>
+          <div class="plain-callout">
+            <span class="label">In plain English</span>
+            <p>Imagine someone hands you a folder labelled <strong>"UFO sightings"</strong> and inside are 39 actual sighting reports plus two thick reference books titled <em>"a history of every rocket launch we did"</em> and <em>"why rockets sometimes fail."</em> Those reference books aren't sightings — they're the kind of thing an investigator pulls off the shelf to check whether a reported "UFO" was actually a known rocket launch. We initially assumed they were public documents bundled in for transparency. <strong>They aren't.</strong> Both are internal DoD reference material that has never been publicly released anywhere we can find. So why are they in a UAP disclosure with their own DOW-UAP file numbers? The metadata doesn't tell us.</p>
+          </div>
+        </div>
+
+        <div class="finding">
+          <div class="finding-num">02 / KEY FINDING</div>
+          <h3>The release bundles <em>at least four</em> separate declassification cycles.</h3>
+          <p>Initial inspection found two merged MDR batches with hidden renumbering. Closer examination of the bottom-of-page MDR stamps (visible only when pages are rendered at 300 DPI) revealed two additional tracks:</p>
+          <ul style="font-family:var(--mono);font-size:14px;color:var(--fg-2);line-height:1.7;margin:14px 0 14px 24px;list-style:square;">
+            <li><strong>USCENTCOM MDR 26-0038 → 26-0046</strong> · 23 files (most Series 1) · declass May–Jun 2026</li>
+            <li><strong>USCENTCOM MDR 26-0028</strong> · 17 files (all Series 2, with hidden renumbering D27–D43 → D49–D75) · declass May 2026</li>
+            <li><strong>USCENTCOM MDR 25-0104</strong> · D23 only · declass <strong>12 Sep 2025</strong> — 8 months before release</li>
+            <li><strong>Joint Staff JS-250710-TM8S / MDR 25-0094 → 25-0099</strong> · D20 only · declass <strong>8 Oct 2025</strong> — 7 months before release · six consecutive case numbers, only D20 surfaces</li>
+          </ul>
+          <p>Two of these tracks were completed months before the public release date and held for inclusion. This is more consistent with deliberate curation across multiple Pentagon offices than with a single contemporaneous declassification action.</p>
+          <div class="plain-callout">
+            <span class="label">In plain English</span>
+            <p>The May 8, 2026 release looks like one big drop, but it's actually <strong>at least four different declassification jobs</strong> bundled together. Two of them were finished months earlier (a separate USCENTCOM case in September 2025, and a Joint Staff case in October 2025) but held back for the May publication. So the timing of the release was chosen for outside reasons — political, PR, executive order, whatever — and the declassification work was stockpiled in advance.</p>
+          </div>
+        </div>
+
+        <div class="finding note">
+          <div class="finding-num">03 / METADATA ERROR</div>
+          <h3>D20's title is <em>wrong on both</em> location and year.</h3>
+          <p>The internal Title reads <em>"DOW-UAP-D20, Mission Report, Southern United States, 2020."</em></p>
+          <p>The actual content is an <strong>F-16CM 2-ship mission</strong> taking off from Prince Sultan Air Base, Saudi Arabia on <strong>19 March 2023</strong>, transiting Iraq and Syria airspace under Operation Inherent Resolve, observing UAPs in the Eastern Syria Security Area.</p>
+          <p>Not Southern US. Not 2020. An analyst trusting the title would mis-locate the report by half a world and three years.</p>
+          <div class="plain-callout">
+            <span class="label">In plain English</span>
+            <p>The title page of file D20 says it's a 2020 sighting somewhere in the southern United States. The actual contents are a March 2023 fighter mission over <strong>Syria</strong>. If a journalist or researcher cited this report as "a domestic U.S. sighting from 2020," they'd be wrong on every count. A clerical error, probably — but a meaningful one if anyone takes the labels at face value.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="renumbering">
+  <div class="section-head">
+    <div class="section-num">§ 03 / The Hidden Renumbering</div>
+    <h2 class="section-title">Series 2's internal IDs <em>do not match</em> their filenames.</h2>
+  </div>
+  <div class="section-body">
+    <div class="section-marginalia">
+      <strong>Why this matters</strong><br>
+      The filename sequence D49–D75 looks continuous. The internal Title metadata shows it's actually D27–D43 sequential — a different release batch packaged into reserved slots after Series 1's D48 boundary.<br><br>
+      Hover any row for filename context. The collision at D27 is the only case of two files claiming the same numeric ID.
+    </div>
+    <div class="section-content">
+      <p>Two separate MDR declassification packages were merged into one batch and presented as a single sequence D3–D75. The renumbering preserved the original Series 2 IDs internally but assigned new external numbers starting at D49. The mapping was reconstructed from <code>Title</code> metadata; nothing in the filenames discloses it.</p>
+      <div class="renumber-viz">
+        <div class="renumber-cols">
+          <div class="renumber-col">
+            <h4>External / Filename <small>· what users see</small></h4>
+            <div id="renumber-left"></div>
+          </div>
+          <div class="renumber-link">
+            <div class="renumber-arrow">remapped</div>
+          </div>
+          <div class="renumber-col">
+            <h4>Internal / Title <small>· DoW-UAP-D## series</small></h4>
+            <div id="renumber-right"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="inventory">
+  <div class="section-head">
+    <div class="section-num">§ 04 / Corpus Inventory</div>
+    <h2 class="section-title">What's there. What's missing. What's <em>held back</em>.</h2>
+  </div>
+  <div class="section-body">
+    <div class="section-marginalia">
+      <strong>The grid</strong><br>
+      Each cell is one document slot from D1 to D75. Hover for what's at that position. The continuous gap at D66–D73 is the most significant reserved block: eight numbered slots, all empty, between Persian Gulf 2020 (D65) and Syria 2023 (D74).
+    </div>
+    <div class="section-content">
+      <p>The release covers 41 of 75 numbered slots. The other 34 are absent — most as single gaps, but eight in a continuous block. <em>Hover any cell below to see what's at that slot.</em></p>
+      <div class="gap-legend">
+        <span><span class="swatch" style="background: var(--amber); border-color: var(--amber-hot);"></span> Released, UAP report</span>
+        <span><span class="swatch" style="border-color: var(--amber); background: transparent;"></span> Released, non-UAP reference</span>
+        <span><span class="swatch" style="background: var(--red-bg); border-color: var(--red);"></span> Reserved block D66–D73</span>
+        <span><span class="swatch" style="background: repeating-linear-gradient(45deg, var(--surface) 0 4px, transparent 4px 8px);"></span> Absent</span>
+      </div>
+      <div class="gap-grid" id="gapGrid"></div>
+      <p style="margin-top:16px;font-size:14.5px;color:var(--muted);font-family:var(--mono);letter-spacing:0.04em;">Hover any slot for context. Released UAP reports cluster in two blocks. The D66–D73 reserved block sits between Series 2's last 2020-era report and its 2023+ tail.</p>
+    </div>
+  </div>
+</section>
+<div class="gap-tooltip" id="gapTooltip"></div>
+
+<section id="explorer">
+  <div class="section-head">
+    <div class="section-num">§ 05 / Mission Report Explorer</div>
+    <h2 class="section-title">Every report. Every filter. <em>Click to expand.</em></h2>
+  </div>
+  <div class="section-body" style="grid-template-columns: 1fr;">
+    <div class="section-content">
+      <p>All 41 files in the release. <strong>Click any row to expand</strong> the full report — operator's exact language, file metadata, production batch. Use the filters and search to narrow down; click column headers to sort.</p>
+      <div class="filters">
+        <div class="filter-group">
+          <span class="filter-label">Theater</span>
+          <button class="chip active" data-filter="theater" data-value="all">All</button>
+          <button class="chip" data-filter="theater" data-value="Persian Gulf">Persian Gulf</button>
+          <button class="chip" data-filter="theater" data-value="Iraq/Syria">Iraq/Syria</button>
+          <button class="chip" data-filter="theater" data-value="Greece">Greece</button>
+          <button class="chip" data-filter="theater" data-value="Other">Other</button>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">Tag</span>
+          <button class="chip active" data-filter="tag" data-value="all">All</button>
+          <button class="chip" data-filter="tag" data-value="PROSAIC">Prosaic ID</button>
+          <button class="chip" data-filter="tag" data-value="ARTIFACT">Sensor Artifact</button>
+          <button class="chip" data-filter="tag" data-value="UNRESOLVED">Unresolved</button>
+          <button class="chip" data-filter="tag" data-value="CRITICAL">Key Finding</button>
+          <button class="chip" data-filter="tag" data-value="NONUAP">Non-UAP</button>
+        </div>
+        <div class="filter-group" style="flex: 1; min-width: 280px;">
+          <span class="filter-label">Search</span>
+          <input type="text" class="search-input" id="searchInput" placeholder="Find by ID, location, sensor, text…">
+        </div>
+      </div>
+      <div class="explorer">
+        <div class="explorer-header">
+          <span class="sortable" data-sort="id">ID</span>
+          <span class="sortable" data-sort="date">Date</span>
+          <span class="sortable" data-sort="location">Location</span>
+          <span>Aircraft / Unit</span>
+          <span class="sortable" data-sort="sensor">Sensor</span>
+          <span class="sortable" data-sort="tag">Assessment</span>
+          <span></span>
+        </div>
+        <div id="explorerBody"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="timeline">
+  <div class="section-head">
+    <div class="section-num">§ 06 / Timeline</div>
+    <h2 class="section-title">When things happened. When the files <em>were made</em>.</h2>
+  </div>
+  <div class="section-body">
+    <div class="section-marginalia">
+      <strong>Three lanes</strong><br>
+      Top: the two non-UAP reference documents and their dates of coverage.<br><br>
+      Middle: every UAP sighting in the corpus, 2016–2025.<br><br>
+      Bottom: when these PDFs were created and finalized — the May 6–7 2026 batch finalization sits at the right edge.
+    </div>
+    <div class="section-content">
+      <p>D49's launch data ends 16 years before the earliest UAP report in this set. D74 and D75 were created May 2025, then held until May 2026. The whole batch was encrypted in two consecutive evenings.</p>
+      <div class="timeline-wrap"><div class="timeline" id="timeline"></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="forensics">
+  <div class="section-head">
+    <div class="section-num">§ 07 / Forensic Notes</div>
+    <h2 class="section-title">What the file structure <em>tells you</em>.</h2>
+  </div>
+  <div class="section-body">
+    <div class="section-marginalia">
+      <strong>Detail</strong><br>
+      Beyond the headlines: how the files were produced, what the encryption actually does (and doesn't), where compression introduces risk, and what was checked and ruled out.
+    </div>
+    <div class="section-content">
+      <div class="tech-list">
+        <div class="tech-item">
+          <div class="tech-num">01</div>
+          <div class="tech-body">
+            <h4>The "no extract" encryption flag is advisory only.</h4>
+            <p>All 41 files use AES-256 with permission flags blocking text extraction. <code>pdftotext</code> from poppler ignores the flag entirely and pulls the underlying text layer. For scanned files, that layer was added by Adobe Acrobat's Paper Capture OCR — invisible beneath the page image but fully readable. The encryption deters polite PDF readers; any forensic tool walks straight through it.</p>
+            <div class="plain-callout">
+              <span class="label">Plain English</span>
+              <p>The files are locked with strong encryption — but the lock is more of a <em>"please don't"</em> than an actual barrier. Free open-source tools read the text straight out. The interesting part is what's <strong>not</strong> there: redactions are baked in permanently, not hidden behind a removable layer. No one is going to "decrypt" the blacked-out sections.</p>
+            </div>
+          </div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-num">02</div>
+          <div class="tech-body">
+            <h4>Three production tiers, identified from <code>Producer</code> metadata.</h4>
+            <p><strong>Born-digital</strong> (blank Producer field, ~22 files): the MISREP form filled in digitally and exported. <strong>Paper Capture scans</strong> (Producer: <code>Adobe Acrobat (32-bit) 26 Paper Capture Plug-in</code>, ~17 files): physical paper scanned and OCR'd by Acrobat. <strong>Pristine</strong> (no post-creation edits, 2 files — D42 and D48): created once, never modified.</p>
+            <div class="plain-callout">
+              <span class="label">Plain English</span>
+              <p>The files came from three different production paths. Some operators typed their reports straight into a digital form. Others printed and rescanned theirs. A couple were created once and never touched again. This matters because <strong>scanned-and-OCR'd reports can introduce errors</strong> — see the next item.</p>
+            </div>
+          </div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-num">03</div>
+          <div class="tech-body">
+            <h4>JBIG2 compression risk: <em>checked three ways, all clean</em>.</h4>
+            <p>The Xerox JBIG2 character-substitution bug (notably 6↔8 swaps) affects <strong>10 files</strong> (revised down from an earlier count of 14 — <code>pdfimages -list</code> showed that D23, D61, D62, D64 use JPEG/JPX rather than JBIG2). Actual JBIG2 set: <code>D14 D16 D18 D19 D20 D33 D35 D38 D48 D49</code>. Every suspect numeric value was cross-checked via three independent extraction methods: (1) <code>pdftotext</code> pulling Adobe's invisible OCR layer, (2) tesseract OCR on rendered images, (3) re-rendering specific pages at 300 DPI and re-OCRing. <strong>All three methods agreed on every value</strong>.</p>
+            <p style="margin-top:10px"><strong>Verdicts:</strong> <code>D20 FL600+</code> is a real operator estimate (the "+" suffix is operator's explicit "or higher" notation). <code>D62 FL040</code> is the scanned value as-is, but D62 doesn't use JBIG2 anyway. <code>D23 58 KIAS</code> at FL230 appears to be a partial-redaction artifact (likely 158 KIAS with leading "1" inside a redaction box). All other altitudes and speeds are normal patrol values.</p>
+            <div class="plain-callout">
+              <span class="label">Plain English</span>
+              <p>The famous Xerox digit-swap bug <em>could</em> have corrupted numbers in 14 of the files — coordinates, altitudes, times. I checked the suspicious-looking ones by reading them three different ways and comparing. <strong>All three readings agreed</strong>. That makes substitution unlikely. D20's "objects at 60,000+ ft" is what the operator wrote down (with an explicit "estimate or higher" mark). D62's "4,000 ft" is also what's actually on the page. The numbers in this release appear trustworthy.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tech-item">
+          <div class="tech-num">03a</div>
+          <div class="tech-body">
+            <h4>D20 was declassified through <em>Joint Staff</em>, not USCENTCOM — seven months earlier.</h4>
+            <p>While verifying D20's flight-level values by rendering page 6 at 300 DPI, the bottom-of-page MDR markings became readable: <code>MDR 25-0094 thru MDR 25-0099 / JS-250710-TM8S</code>, declassified <strong>8 October 2025</strong>. The "JS" prefix is Joint Staff, not USCENTCOM. D20 came through a separate declassification channel and was bundled into the May 2026 batch despite its prior release.</p>
+            <div class="plain-callout">
+              <span class="label">Plain English</span>
+              <p>The May 8, 2026 release is presented as a single USCENTCOM declassification, but D20 was actually declassified months earlier by a different Pentagon office (the Joint Staff). It got rolled into this release alongside the USCENTCOM material. So <strong>the corpus isn't a single declassification — it's a curated bundle from multiple tracks</strong>, with at least one document predating the public release by seven months. May be findable elsewhere in Joint Staff FOIA reading rooms.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tech-item">
+          <div class="tech-num">03c</div>
+          <div class="tech-body">
+            <h4>D23 came through <em>USCENTCOM MDR 25-0104</em> — and was scanned in color, not black-and-white.</h4>
+            <p>Like D20, D23 carries its own distinct MDR provenance: bottom-of-page stamps read <code>USCENTCOM MDR 25-0104</code> declassified <strong>12 September 2025</strong>. Eight months before the May 2026 release. This is a USCENTCOM MDR but from the prior fiscal year (FY25), not the FY26 cycle the rest of the corpus uses.</p>
+            <p>D23 is also the only file in the corpus stored as <strong>RGB JPEG images at 144 DPI</strong> (one full-page color image per page) instead of the standard 1-bit JBIG2 scans. The text content is a normal MQ-9 mission report (UAE, October 2023); the unusual format probably exists to preserve the red declassification stamps and other color markings. <em>Initial analysis miscounted D23 as a JBIG2 file — it isn't, and the JBIG2 risk count drops from 14 to 10 as a result.</em></p>
+            <div class="plain-callout">
+              <span class="label">Plain English</span>
+              <p>D23 is the second file (after D20) where the bottom-of-page stamps reveal it came through a separate declassification track months before the public release. The May 2026 release isn't one single declassification — it's a curated bundle from <strong>at least four separate Pentagon processes</strong>, with the publication date chosen for outside reasons and the declassification work stockpiled.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tech-item">
+          <div class="tech-num">03b</div>
+          <div class="tech-body">
+            <h4>D20's crew explicitly tested whether the bright objects were <em>stars</em>. They weren't.</h4>
+            <p>Buried in D20's GENTEXT/UAP block: <em>"ANALYST COMMENT: [REDACTED] FLT COMPARED TARGETING POD BETWEEN POSS UAP AND STAR. RESULTS WERE DIFFERENT."</em> The flight crew (an F-16CM two-ship) deliberately compared the targeting pod's signature on a candidate UAP against a known star. They did not match. This is the most common prosaic explanation for high-altitude visual UAP sightings, and the operators ruled it out at the time.</p>
+            <div class="plain-callout">
+              <span class="label">Plain English</span>
+              <p>Most "UFOs" seen at high altitude on infrared sensors turn out to be stars or satellites. D20's pilots <strong>tested for exactly that</strong> by pointing the targeting pod at a star and comparing. The signatures didn't match. So D20 isn't a careless report — it's an operator-investigated case where the obvious prosaic explanation was actively ruled out by the crew at the time of the observation.</p>
+            </div>
+          </div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-num">04</div>
+          <div class="tech-body">
+            <h4>Series 1 went through three post-creation revisions. Series 2, one.</h4>
+            <p>Series 1 files contain four <code>%%EOF</code> markers each: skeleton form → bulk content add → small modification → final encryption. Series 2 files have two markers (skeleton → final). Earlier xref tables were checked for recoverable pre-redaction content; they contain only empty form skeletons. Redactions were baked into the bulk content addition, not applied as later overlays.</p>
+            <div class="plain-callout">
+              <span class="label">Plain English</span>
+              <p>PDFs keep a small history of how they were saved over time. We checked whether any of that history secretly preserved <strong>pre-redaction text</strong> (the stuff behind the black bars). It doesn't — the earlier saves are just empty form templates. Whoever did the redactions did them properly.</p>
+            </div>
+          </div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-num">05</div>
+          <div class="tech-body">
+            <h4>Encryption was applied as two batches on consecutive evenings.</h4>
+            <p>All Series 2 files (D49–D75) have ModDate timestamps clustered between <strong>20:33 and 20:38 EDT on May 6, 2026</strong>. All Series 1 files (D3–D48) cluster between <strong>15:43 and 16:44 EDT on May 7, 2026</strong>. Within each batch, timestamps run in alphabetical filename order at ~20-second intervals — a single sequential script. Series 2 was finalized <em>first</em>, despite carrying the lower internal IDs.</p>
+            <div class="plain-callout">
+              <span class="label">Plain English</span>
+              <p>The 41 files weren't finalized one by one over weeks — they were processed by a script in two big batches, on two consecutive evenings, just before the May 8 publication. The "renumbered" batch (Series 2) was actually processed <strong>first</strong>, even though it ended up with higher numbers in the final release. The reshuffling happened between the two batches.</p>
+            </div>
+          </div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-num">06</div>
+          <div class="tech-body">
+            <h4>D74 and D75 sat encrypted for eleven months.</h4>
+            <p>Both have CreationDate <code>May 16, 2025</code> but ModDate <code>May 6, 2026</code>. They're also the only two Series 2 files that retained the original MISREP form's Optional Content Group layers — the production prototypes that the rest of the batch was modelled on.</p>
+            <div class="plain-callout">
+              <span class="label">Plain English</span>
+              <p>Two files were prepared in <strong>May 2025</strong> — almost a year before the release — and then sat around until the May 2026 publication. They also look like the "template" files that the rest of the batch was modelled on. Whatever review or decision kept them on hold for 11 months happened off-screen; the metadata only shows the dates.</p>
+            </div>
+          </div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-num">07</div>
+          <div class="tech-body">
+            <h4>D49 was created February 7, 2024 — 14 months before any other Series 2 file.</h4>
+            <p>The Vandenberg launch summary was prepared well ahead of the rest of the batch. The timing aligns roughly with AARO's <em>Historical Record Report Volume 1</em> (March 2024) — possibly compiled as supporting evidence for that effort.</p>
+            <div class="plain-callout">
+              <span class="label">Plain English</span>
+              <p>D49 (the Vandenberg launch summary — one of the two non-UAP reference docs) is the <strong>oldest modern file</strong> in the batch by more than a year. The timing roughly matches when AARO published its big historical UAP report in March 2024, suggesting D49 may have been compiled as background research for that report, not for this release.</p>
+            </div>
+          </div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-num">08</div>
+          <div class="tech-body">
+            <h4>Things checked and ruled out.</h4>
+            <p>D16's <code>/JS</code> count was random bytes inside an encrypted stream, not actual JavaScript. D48's <code>/AA</code> was the same false positive. OCG layers in D10 / D74 / D75 are functional template watermarks set to <code>/ON</code> for all events, not redaction-hiding vectors. Pre-redaction content is not recoverable from earlier xref tables — those tables hold empty form skeletons only.</p>
+            <div class="plain-callout">
+              <span class="label">Plain English</span>
+              <p>Some things looked suspicious at first glance and turned out to be nothing: <strong>no embedded scripts, no hidden auto-actions, no removable redaction overlays, no recoverable original text behind the black bars.</strong> Whoever prepared the files did the redactions correctly. Saying so explicitly because <em>"didn't find anything"</em> is also a finding.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="conclusion">
+  <div class="section-head">
+    <div class="section-num">§ 08 / Bottom Line</div>
+    <h2 class="section-title">What this release <em>actually</em> establishes.</h2>
+  </div>
+  <div class="conclusion-body">
+    <p>The Department of War published 161 real declassified files on May 8, 2026, in response to a real Trump directive of February 19, 2026. The technical handling — image-only PDFs, scrubbed EXIF, zeroed MP4 timestamps — is professional and conservative. There is no forensic slip-up exposing under-redaction.</p>
+    <p>The framing is doing more work than the contents. The war.gov UI presents a uniform <em>Unresolved UAP</em> wall of mystery. The DVIDS captions, which DoD's publication conventions require, reveal that two-thirds of the videos in the tranche are either identified by the original operator as something known (a Russian fighter, a possible missile, four possible birds), explicitly flagged by the operator as a sensor artifact (halo, glare, single-sensor detection, possible water reflection), or have no original-observer description at all.</p>
+    <p>The mission reports — now text-extracted — show several more with prosaic explanations baked in: IR lens flares during weapons employment, targets becoming <em>dim and disappearing</em> on a targeting pod, operator-doubted reflections off water. The D33 / PR-34 Greece case (90-degree turns at ~80 mph above the ocean) remains one of the few entries without a ready explanation in its own report.</p>
+    <p>Two further things the metadata makes clear: the 41 D## files <strong>are not all UAP reports</strong> — D48 and D49 are space-launch reference material with zero UAP content, included as analyst context for cases not present in this release. And the release was assembled from <strong>two separate MDR cycles merged with hidden renumbering</strong>, with eight reserved external slots (D66–D73) sitting empty for a future cycle.</p>
+    <p>The release is real. The mystery framing is doing a lot of work. And the story of what's <em>in</em> this batch is also a story of what's been <em>deferred</em>.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div style="max-width: 720px; margin: 0 auto;">
+    <div style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; color: var(--amber); margin-bottom: 16px;">BY DUCKJUSTICE · WITH CLAUDE (ANTHROPIC) AS RESEARCH ASSISTANT</div>
+    <p style="font-family: var(--serif-b); font-size: 14px; line-height: 1.6; color: var(--fg-2); text-transform: none; letter-spacing: 0; margin-bottom: 18px; max-width: 60ch; margin-left: auto; margin-right: auto;">A reader's anatomy of the Department of War's May 8, 2026 UAP/UFO disclosure. All findings derived from PDF metadata and OCR'd content of the 41 mission reports in the public release. No insider access, no leaks — just careful reading of public documents using standard tools (pdfinfo, exiftool, qpdf, pdftotext, tesseract, pdfimages). Synthesis and prose drafted with Claude, all findings verified against the source files.</p>
+    <p style="font-family: var(--serif-b); font-size: 13px; line-height: 1.6; color: var(--muted); text-transform: none; letter-spacing: 0; margin-bottom: 24px;">v1.1 · May 11, 2026 · free to share, cite, mirror, or critique. Adversarial review welcomed.</p>
+    <div class="footer-sources">
+      <a href="https://www.war.gov/UFO/">war.gov/UFO</a>
+      <a href="https://www.aaro.mil/">aaro.mil</a>
+      <a href="https://media.defense.gov/2024/Mar/08/2003409233/-1/-1/0/DOPSR-CLEARED-508-COMPLIANT-HRRV1-08-MAR-2024-FINAL.PDF">AARO HRR Vol. 1</a>
+      <span>NYT · Cooper · May 8, 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// All data hardcoded; no user input is ever inserted into the DOM as HTML.
+// Dynamic rendering uses createElement + textContent throughout.
+const REPORTS = [
+{id:"D3",intId:"DOW-UAP-D3",fname:"d3-mission-report-arabian-gulf-2020",series:1,batch:"26-0038",date:"2020",dateSort:20200101,theater:"Persian Gulf",location:"Arabian Gulf",aircraft:"MQ-9 / 482 ATKS",sensor:"FMV",tag:"PROSAIC",tagLabel:"Prosaic ID",quote:"4X UAP OBSERVED FLYING IN [REDACTED] FOV. AT APPROX 1736Z 4 UAP WERE OBSERVED BENEATH [REDACTED]. 1X UAP OBSERVED AT 17:36:22, 2X UAP OBSERVED SIDE BY SIDE AT 17:36:30, AND 1X UAP OBSERVED AT 17:36:49.",pages:7,size:"101 KB",created:"2026-04-21",producer:"Born-digital",xref:4,jbig2:false,ocg:false},
+{id:"D4",intId:"DOW-UAP-D4",fname:"d4-mission-report-arabian-gulf-2020",series:1,batch:"26-0038",date:"2020",dateSort:20200102,theater:"Persian Gulf",location:"Arabian Gulf",aircraft:"MQ-9 / 482 ATKS",sensor:"FMV",tag:"UNRESOLVED",tagLabel:"Unresolved",quote:"AT 1258Z, [REDACTED] OBSERVED POSS UAP IVO 34SDG9041417044. BRIEF OBSERVATION PRECLUDED UAP ALTITUDE ESTIMATES. VELOCITY ESTIMATED AT 321 KNOTS. UAP INCREASED SPEED AND CHANGED DIRECTION TOWARDS THE EAST.",pages:5,size:"29 KB",created:"2026-04-29",producer:"Born-digital",xref:4,jbig2:false,ocg:false},
+{id:"D5",intId:"DOW-UAP-D5",fname:"d5-mission-report-arabian-gulf-2020",series:1,batch:"26-0038",date:"2020",dateSort:20200103,theater:"Persian Gulf",location:"Arabian Gulf",aircraft:"MQ-9 / 482 ATKS",sensor:"FMV",tag:"UNRESOLVED",tagLabel:"Unresolved",quote:"Two events: (1354Z) 1X UAP IVO 34SCE7566990098 at 40 KNOTS, FL160-FL170, constant. (2243Z) 2X POSS UAPS IVO 35TQK1580995057, approx 278 KNOTS, accelerated south.",pages:6,size:"30 KB",created:"2026-04-21",producer:"Born-digital",xref:4,jbig2:false,ocg:false},
+{id:"D6",intId:"DOW-UAP-D6",fname:"d6-mission-report-arabian-gulf-2020",series:1,batch:"26-0038",date:"2020",dateSort:20200104,theater:"Persian Gulf",location:"Arabian Gulf",aircraft:"MQ-9 / 482 ATKS",sensor:"FMV",tag:"BRIEF",tagLabel:"Brief",quote:"AT 1246Z, [REDACTED] OBSERVED 1X PROB UAP IVO 3SKT4255899519. NO MISSION IMPACT, CONTINUED ORIGINAL TASKING.",pages:7,size:"27 KB",created:"2026-04-29",producer:"Born-digital",xref:4,jbig2:false,ocg:false},
+{id:"D7",intId:"DOW-UAP-D7",fname:"d7-mission-report-arabian-gulf-2020",series:1,batch:"26-0038",date:"2020",dateSort:20200105,theater:"Persian Gulf",location:"Arabian Gulf",aircraft:"MQ-9 / 482 ATKS",sensor:"TFLIR",tag:"PROSAIC",tagLabel:"Balloon (operator ID)",quote:"LOOKS LIKE A BALLOON, SIMILAR TO PREVIOUSLY REPORTED UAP FROM 48FW. OBSERVED A WEAPONS QUALITY 1 TRACK OF A UAP TRAVELING WITH THE WINDS AT 31,000 FT MSL IVO 323'S. WAS ABLE TO MAKE A NEXT TO SHOOT ON THE TRACK AND VISUALLY ID THE UAP IN THE TFLIR.",pages:6,size:"27 KB",created:"2026-04-21",producer:"Born-digital",xref:4,jbig2:false,ocg:false},
+{id:"D8",intId:"DOW-UAP-D8",fname:"d8-mission-report-djibouti-2025",series:1,batch:"26-0038",date:"2025",dateSort:20250101,theater:"Other",location:"Djibouti",aircraft:"MQ-9 / 482 ATKS",sensor:"FMV / IR",tag:"UNRESOLVED",tagLabel:"Unresolved",quote:"AT 1653Z, [REDACTED] OBS 2X ROUND WHITE HOT UAPS DYNAMIC SOUTH AT APPROX 240NM/HOUR IVO 35SQT3423692957.",pages:7,size:"29 KB",created:"2026-04-29",producer:"Born-digital",xref:4,jbig2:false,ocg:false},
+{id:"D10",intId:"D-10 (truncated)",fname:"d10-mission-report-middle-east-may-2022",series:1,batch:"26-0038",date:"May 2022",dateSort:20220501,theater:"Iraq/Syria",location:"Middle East",aircraft:"MQ-9",sensor:"FMV",tag:"PROSAIC",tagLabel:"Missile + Birds (operator ID)",quote:"FROM 1514Z TO 1934Z OBSERVED 5X UAP. AT 1514Z, A UAP WITH THE VISREC OF A POSSIBLE [REDACTED] MISSILE FLY ACROSS THE FOV. 4X OTHER UAPS FIT CLOSER TO THE PROFILE OF POSSIBLE BIRDS.",pages:6,size:"663 KB",created:"2025-09-16",producer:"Born-digital",xref:3,jbig2:false,ocg:true,videoRef:"PR-19"},
+{id:"D12",intId:"DOW-UAP-D12",fname:"d12-mission-report-iraq-may-2022",series:1,batch:"26-0038",date:"May 2022",dateSort:20220515,theater:"Iraq/Syria",location:"Iraq",aircraft:"MQ-9",sensor:"FMV",tag:"UNRESOLVED",tagLabel:"Unresolved",quote:"OBSERVED A UAP AT 2043Z FLY NORTH TO NORTH EAST AND FOLLOWED AS LONG AS POSSIBLE. SCREENER COULD NOT GET A POSITIVE ID ON THE UAP.",pages:6,size:"670 KB",created:"2025-11-04",producer:"Born-digital",xref:4,jbig2:false,ocg:false},
+{id:"D14",intId:"DOW-UAP-D14",fname:"d14-mission-report-iraq-may-2022",series:1,batch:"26-0038",date:"May 2022",dateSort:20220520,theater:"Iraq/Syria",location:"Syria (Latakia)",aircraft:"MQ-9",sensor:"FMV",tag:"CRITICAL",tagLabel:"Two events / Key finding",quote:"Two events, same mission: (1) OBSERVATION 0011Z: ONE PROBABLE SU-27/35 LANDING IVO 36SYE6 at Latakia AFB. (2) UAP 0117Z: separate small contact, screener COULD NOT GET A POSITIVE ID.",pages:9,size:"7.5 MB",created:"2025-10-23",producer:"Paper Capture",xref:4,jbig2:true,ocg:false,videoRef:"PR-21"},
+{id:"D16",intId:"DOW-UAP-D16",fname:"d16-mission-report-syria-july-2022",series:1,batch:"26-0038",date:"Jul 2022",dateSort:20220701,theater:"Iraq/Syria",location:"Syria",aircraft:"MQ-9",sensor:"FMV",tag:"BRIEF",tagLabel:"Brief",quote:"OBSERVED AN UNIDENTIFIED AERIAL PHENOMENON IVO 37SFU271. THE UAP OCCURED IN LESS THAN A MINUTE, WITH THE UAP MOVING FROM N TO S.",pages:7,size:"7.0 MB",created:"2025-10-23",producer:"Paper Capture",xref:4,jbig2:true,ocg:false},
+{id:"D18",intId:"D-18 (truncated)",fname:"d18-mission-report-iraq-december-2022",series:1,batch:"26-0038",date:"Dec 2022",dateSort:20221201,theater:"Iraq/Syria",location:"Iraq",aircraft:"MQ-9",sensor:"FMV",tag:"BRIEF",tagLabel:"Brief",quote:"OBSERVED 1X POSSIBLE UAP/UAV FLYING WEST TO EAST IVO 38SMB4. DID NOT FOLLOW UAP. CONTINUED THE MISSION AS TASKED, NO FURTHER EVENTS WERE OBSERVED.",pages:6,size:"3.7 MB",created:"2025-10-23",producer:"Paper Capture",xref:4,jbig2:true,ocg:false},
+{id:"D19",intId:"DOW-UAP-D19",fname:"d19-mission-report-syria-february-21-2023",series:1,batch:"26-0038",date:"Feb 21, 2023",dateSort:20230221,theater:"Iraq/Syria",location:"Syria (Shaddadi)",aircraft:"F-15 CAP",sensor:"FMV / Radar",tag:"PROSAIC",tagLabel:"Balloon (operator ID)",quote:"0025Z: 3X POSS UAP IVO SHADDADI AT FL240. NO RADAR RETURNS RECEIVED FROM UAP. Then 0135Z same mission: 1X POSS BALLOON IVO Shaddadi at FL210.",pages:10,size:"5.9 MB",created:"2025-10-23",producer:"Paper Capture",xref:4,jbig2:true,ocg:false},
+{id:"D20",intId:"DOW-UAP-D20",fname:"d20-mission-report-southern-united-states-2023",series:1,batch:"26-0038 (filename) / JS-250710-TM8S (actual)",date:"Mar 19 – Mar 31, 2023",dateSort:20230319,theater:"Iraq/Syria",location:"Eastern Syria (ESSA)",aircraft:"F-16CM 2-ship at FL265",sensor:"Targeting Pod",tag:"UNRESOLVED",tagLabel:"Unresolved (star ruled out)",quote:"F-16CM 2-ship from Prince Sultan AB, Operation Inherent Resolve. At 2302:05Z 31 MAR 23, observed POSS 10X-20X BRIGHT OBJECTS MANEUVERING QUICKLY W to E NE of RLZ at FL600+ (estimate or higher; friendlies at FL265). Each obtained on targeting pod (TV mode) for ~20s before BECOMING DIM AND DISAPPEARING. NONE OF THE OBJECTS WERE SEEN IN ANY FORMATIONS AS PREVIOUSLY SEEN IN PRIOR SORTIES. ANALYST COMMENT: FLT COMPARED TARGETING POD BETWEEN POSS UAP AND STAR — RESULTS WERE DIFFERENT. Note: page 6 carries Joint Staff MDR markings (MDR 25-0094 thru 25-0099 / JS-250710-TM8S), declassified 8 October 2025 — predates the May 2026 USCENTCOM release by seven months.",pages:6,size:"3.7 MB",created:"2025-10-23",producer:"Paper Capture",xref:4,jbig2:true,ocg:false,metaError:true},
+{id:"D23",intId:"DOW-UAP-D23",fname:"d23-mission-report-united-arab-emirates-october-2023",series:1,batch:"USCENTCOM MDR 25-0104 (FY25, separate track)",date:"Oct 24, 2023",dateSort:20231024,theater:"Other",location:"UAE",aircraft:"MQ-9",sensor:"FMV",tag:"UNRESOLVED",tagLabel:"Benign (operator)",quote:"TWO UAP events same mission. (0241Z) 1X UAP IVO 39RXK6, (0322Z) 1X UAP. Physical State: Solid. Under intelligent control: NO. Observer assessment: Benign. Aircraft at FL243, 162 KTAS. Note: declassified 12 Sep 2025 under USCENTCOM MDR 25-0104 — eight months before the May 2026 release, and a different MDR cycle than the rest of the corpus. D23 is also the only file stored as RGB JPEG (144 DPI, color-preserving) rather than 1-bit JBIG2 — likely to preserve the red declassification stamps.",pages:9,size:"1.3 MB",created:"2025-09-12",producer:"Paper Capture (color JPEG)",xref:4,jbig2:false,ocg:false},
+{id:"D25",intId:"DOW-UAP-D25",fname:"d25-mission-report-greece-january-2024",series:1,batch:"26-0038",date:"Jan 25, 2024",dateSort:20240125,theater:"Greece",location:"Greece",aircraft:"MQ-9",sensor:"SWIR only",tag:"SINGLE",tagLabel:"Single-Sensor",quote:"AT 0509Z, OBSERVED 1X UAP WHILE IN TRANSIT. UAP WAS FLYING AT A SPEED OF APPROX 434 KNOTS. THE UAP APPEARED DIAMOND IN SHAPE WITH A NON-MANUEVERING PROBE AT THE BOTTOM. THE UAP ONLY APPEARED ON THE SWIR CAMERA. THE EVENT LASTED APPROX 2 MINUTES.",pages:7,size:"680 KB",created:"2026-04-03",producer:"Born-digital",xref:4,jbig2:false,ocg:false,videoRef:"PR-28"},
+{id:"D27",intId:"DOW-UAP-D27",fname:"d27-mission-report-united-arab-emirates-october-2023",series:1,batch:"26-0038",date:"Oct 2023",dateSort:20231007,theater:"Other",location:"UAE coast (over water)",aircraft:"MQ-9",sensor:"IR",tag:"DOUBT",tagLabel:"Operator Doubt",quote:"GLOWING HOT SPHERICAL UNIDENTIFIED OBJECT WITH A VERTICAL UNWAVERING CYLINDRICAL POLE/BAR ATTACHED ON THE BOTTOM. POSS REFLECTION FROM THE OBJECT IN THE WATER. Moving at 140 knots. Aircraft 23,999 ft MSL, 163 kts.",pages:8,size:"689 KB",created:"2026-04-03",producer:"Born-digital",xref:4,jbig2:false,ocg:false},
+{id:"D28",intId:"DOW-UAP-D28",fname:"d28-mission-report-east-china-sea-2024",series:1,batch:"26-0038",date:"Sep 2024",dateSort:20240920,theater:"Iraq/Syria",location:"Ayn al-Asad AB, Iraq (title says ECS)",aircraft:"MQ-9",sensor:"IR (MX-20 / MX-25)",tag:"ARTIFACT",tagLabel:"Sensor Artifact",quote:"During AGM-176 weapons release: UAP CREATED IR LENS FLARE ON MX-20 & MX-25 SENSORS, INDICATING A SIGNIFICANT HEAT SOURCE. Unknown whether an object detached from primary UAP. Crew did not reobserve.",pages:6,size:"633 KB",created:"2026-05-06",producer:"Born-digital",xref:4,jbig2:false,ocg:false},
+{id:"D32",intId:"DOW-UAP-D32",fname:"d32-mission-report-syria-october-2024",series:1,batch:"26-0038",date:"Oct 20, 2024",dateSort:20241020,theater:"Iraq/Syria",location:"Syria",aircraft:"MQ-9",sensor:"FMV",tag:"ARTIFACT",tagLabel:"Sensor Artifact",quote:"MISHAPEN AND UNEVEN BALL OF WHITE LIGHT. Multiple LIGHT/GLARE HALO EFFECT AT THE TOP OF FMV FEED. Aircrew: BENIGN, no mission impact. Official UAP Physical State field: PLASMA.",pages:10,size:"652 KB",created:"2026-05-06",producer:"Born-digital",xref:4,jbig2:false,ocg:false,videoRef:"PR-31/32/33"},
+{id:"D33",intId:"DOW-UAP-D33",fname:"d33-mission-report-greece-october-2023",series:1,batch:"26-0038",date:"Oct 27, 2023",dateSort:20231027,theater:"Greece",location:"Greece",aircraft:"MQ-9",sensor:"FMV",tag:"UNRESOLVED",tagLabel:"Unresolved (star)",quote:"SEEMINGLY CIRCULAR, TOO SMALL TO MAKE OUT DETAILS. Flying just above ocean surface. TOOK MULTIPLE 90 DEGREE TURNS AT AN ESTIMATED 80 MPH. Lost from feed approx 3 min after detection.",pages:7,size:"897 KB",created:"2026-05-04",producer:"Paper Capture",xref:4,jbig2:true,ocg:false,videoRef:"PR-34"},
+{id:"D35",intId:"DOW-UAP-D35",fname:"d35-mission-report-greece-october-2023",series:1,batch:"26-0038",date:"Oct 29, 2023",dateSort:20231029,theater:"Greece",location:"Greece",aircraft:"MQ-9",sensor:"FMV",tag:"UNRESOLVED",tagLabel:"Unresolved",quote:"AT 0811Z, OBSERVED 1X POSS UAP. SEEMINGLY CIRCULAR, TOO SMALL TO MAKE OUT DETAILS.",pages:7,size:"1.4 MB",created:"2026-01-26",producer:"Paper Capture",xref:4,jbig2:true,ocg:false},
+{id:"D38",intId:"DOW-UAP-D38",fname:"d38-range-fouler-debrief-middle-east-may-2020",series:1,batch:"26-0038",date:"May 2020",dateSort:20200501,theater:"Iraq/Syria",location:"Middle East",aircraft:"F/A-18 (range fouler)",sensor:"ATFLIR",tag:"UNRESOLVED",tagLabel:"Range Fouler",quote:"A SOLID WHITE OBJECT flew through FOV. Temporarily lost but reacquired. ERRATIC MOVEMENTS ABOVE THE WATER. Crew obtained 4x zoom but lost due to poor track placement.",pages:1,size:"343 KB",created:"2026-01-26",producer:"Paper Capture",xref:1,jbig2:true,ocg:false,videoRef:"PR-36"},
+{id:"D42",intId:"DOW-UAP-D42",fname:"d42-range-fouler-debrief-japan-2023",series:1,batch:"26-0038",date:"2023",dateSort:20230601,theater:"Other",location:"Japan",aircraft:"F/A-18",sensor:"ATFLIR",tag:"BRIEF",tagLabel:"Range Fouler",quote:"Range fouler debrief form, single page. No UAP-event narrative recovered.",pages:1,size:"296 KB",created:"2026-03-17",producer:"Paper Capture (pristine)",xref:1,jbig2:false,ocg:false},
+{id:"D44",intId:"DOW-UAP-D-44",fname:"d44-range-fouler-arabian-sea-october-2020",series:1,batch:"26-0038",date:"Oct 2020",dateSort:20201015,theater:"Persian Gulf",location:"Arabian Sea",aircraft:"F/A-18",sensor:"ATFLIR",tag:"BRIEF",tagLabel:"Range Fouler",quote:"Range fouler debrief form. No UAP-event narrative recovered.",pages:1,size:"298 KB",created:"2026-04-02",producer:"Paper Capture",xref:2,jbig2:false,ocg:false},
+{id:"D48",intId:"DOW-UAP-D48",fname:"d48-report-september-1996",series:1,batch:"26-0038",date:"Sep 1996",dateSort:19960910,theater:"Other",location:"Patrick AFB / Vandenberg",aircraft:"N/A",sensor:"N/A",tag:"NONUAP",tagLabel:"NOT UAP / Reference",quote:"RTI Report 5180/77-43F: 'Modeling Unlikely Space-Booster Failures in Risk Calculations.' 1996 contractor study for 30th + 45th Space Wings on Atlas / Titan / Delta booster reliability. 181 pages, 22 MB. Zero UAP mentions.",pages:181,size:"22 MB",created:"2002-03-11",producer:"Paper Capture (pristine)",xref:1,jbig2:true,ocg:false,isNonUAP:true},
+{id:"D49",intId:"DoW-UAP-D27 (collision)",fname:"d49-launch-summary-february-2000",series:2,batch:"26-0028",date:"Feb 2000",dateSort:20000203,theater:"Other",location:"Vandenberg AFB",aircraft:"N/A",sensor:"N/A",tag:"NONUAP",tagLabel:"NOT UAP / Reference",quote:"30th Space Wing Office of History — Vandenberg AFB Launch Summary 1958-2000. Glory Trip Minuteman tests, Titan II/IIIB/IIID/IV launches, Burner II, Delta II, Pegasus XL, Nike Target. 113 pages, 9 MB. Zero UAP mentions. Internal Title is 'DoW-UAP-D27' — collides with the actual D27 file.",pages:113,size:"9.1 MB",created:"2024-02-07",producer:"Paper Capture",xref:2,jbig2:true,ocg:false,isNonUAP:true,collision:true},
+{id:"D50",intId:"DoW-UAP-D28",fname:"d50-email-correspondence-indopacom-april-2025",series:2,batch:"26-0028",date:"Apr 2025",dateSort:20250401,theater:"Other",location:"INDOPACOM",aircraft:"Unknown",sensor:"Visual",tag:"BRIEF",tagLabel:"Brief (Email)",quote:"Two events. (2353Z) 1X POSS UAP for 12 SECONDS. (0007Z) 1X POSS UAP for 23 SECONDS. UNK ALTITUDE AND SPEED. NO INTERFERENCE. UNCLASSIFIED.",pages:2,size:"312 KB",created:"2026-04-21",producer:"Born-digital",xref:2,jbig2:false,ocg:false},
+{id:"D51",intId:"DoW-UAP-D29",fname:"d51-email-correspondence-pacific-time-zone-march-2023",series:2,batch:"26-0028",date:"Mar 2023",dateSort:20230301,theater:"Other",location:"Pacific Time Zone",aircraft:"Unknown",sensor:"Visual",tag:"BRIEF",tagLabel:"Brief (Email)",quote:"Email correspondence. Content sparse.",pages:6,size:"76 KB",created:"2026-04-29",producer:"Born-digital",xref:2,jbig2:false,ocg:false},
+{id:"D52",intId:"DoW-UAP-D30",fname:"d52-email-correspondance-na-august-2024",series:2,batch:"26-0028",date:"Oct 31, 2024",dateSort:20241031,theater:"Other",location:"Unspecified",aircraft:"US Aircraft",sensor:"Visual",tag:"BRIEF",tagLabel:"Brief (Email)",quote:"31 OCT 24, U.S Aircraft observed a possible UAP. It appeared to be oval/orb shaped, likely moving at a low speed.",pages:2,size:"67 KB",created:"2026-04-29",producer:"Born-digital",xref:2,jbig2:false,ocg:false},
+{id:"D54",intId:"DoW-UAP-D31",fname:"d54-mission-report-mediterranean-sea-na",series:2,batch:"26-0028",date:"N/A",dateSort:20220101,theater:"Other",location:"Mediterranean (36.6N, 3.0E)",aircraft:"Unknown",sensor:"FMV",tag:"UNRESOLVED",tagLabel:"Unresolved",quote:"1X UAP DETECTED, TRIANGULAR AND METALLIC. OBSERVED WHILE TRANSITING OVER 363453N 0255943E AT 24,989 FT MSL, 168 KTS.",pages:7,size:"20 KB",created:"2026-04-29",producer:"Born-digital",xref:2,jbig2:false,ocg:false},
+{id:"D55",intId:"DoW-UAP-D32",fname:"d55-mission-report-syria-november-2016",series:2,batch:"26-0028",date:"Nov 18, 2016",dateSort:20161118,theater:"Iraq/Syria",location:"Off Latakia, Syria",aircraft:"P-8A Poseidon",sensor:"EO / IR",tag:"MISSILE",tagLabel:"Russian Missile (operator)",quote:"P-8A observed an unidentified low-flying object 86 nm NW of Latakia, approx 500 kts, southeasterly heading outbound from KCTG. Sea-skim mode. Passed between RUS INGUL ARS and 1x U/I vessel. Crew assessment: standard Russian KCTG activity (cruise missile).",pages:1,size:"207 KB",created:"2026-04-02",producer:"Paper Capture",xref:2,jbig2:false,ocg:false},
+{id:"D56",intId:"DoW-UAP-D33",fname:"d56-range-fouler-debrief-arabian-sea-august-2020",series:2,batch:"26-0028",date:"Aug 24, 2020",dateSort:20200824,theater:"Persian Gulf",location:"North Arabian Sea",aircraft:"SH-60 / HSM-73",sensor:"Radar + EO",tag:"UNRESOLVED",tagLabel:"Range Fouler",quote:"3X possible unidentified small air contacts. NEGATIVE ES, RADAR TRACK, AND IFF TRACK. Westerly heading. Initially 1x contact, lost behind cloud. Regained with 2 additional contacts due east. All 3 maintained relative course, speed, altitude.",pages:1,size:"1.9 MB",created:"2026-04-02",producer:"Paper Capture",xref:2,jbig2:false,ocg:false},
+{id:"D57",intId:"DoW-UAP-D34",fname:"d57-mission-report-gulf-of-aden-september-2020",series:2,batch:"26-0028",date:"Sep 2020",dateSort:20200905,theater:"Other",location:"Gulf of Aden",aircraft:"MQ-9",sensor:"FMV",tag:"BRIEF",tagLabel:"Brief",quote:"Mission report single page. UAP-event content not recovered in OCR.",pages:1,size:"295 KB",created:"2026-03-17",producer:"Paper Capture",xref:2,jbig2:false,ocg:false},
+{id:"D58",intId:"DoW-UAP-D35",fname:"d58-range-fouler-debrief-na-october-2020",series:2,batch:"26-0028",date:"Oct 2020",dateSort:20201020,theater:"Other",location:"Unspecified",aircraft:"F/A-18",sensor:"ATFLIR",tag:"BRIEF",tagLabel:"Range Fouler",quote:"Range fouler debrief form. No UAP-event narrative recovered.",pages:1,size:"301 KB",created:"2026-04-02",producer:"Paper Capture",xref:2,jbig2:false,ocg:false},
+{id:"D60",intId:"DoW-UAP-D36",fname:"d60-mission-report-persian-gulf-august-2020",series:2,batch:"26-0028",date:"Aug 8, 2020",dateSort:20200808,theater:"Persian Gulf",location:"Persian Gulf",aircraft:"MQ-9 / 482 ATKS",sensor:"FMV",tag:"UNRESOLVED",tagLabel:"Unresolved",quote:"At 0726Z, observed 1X UAP IVO 39RWL[redacted]. No impact to mission. Same mission also logged an Iranian Air Defense GUARDCALL at 0250Z.",pages:6,size:"2.4 MB",created:"2026-05-06",producer:"Born-digital",xref:2,jbig2:false,ocg:false},
+{id:"D61",intId:"DoW-UAP-D37",fname:"d61-mission-report-persian-gulf-august-2020",series:2,batch:"26-0028",date:"Aug 27, 2020",dateSort:20200827,theater:"Persian Gulf",location:"Persian Gulf",aircraft:"MQ-9 / 482 ATKS",sensor:"FMV",tag:"UNRESOLVED",tagLabel:"Formation",quote:"FROM 1527Z TO 1529Z OBSERVED A FORMATION OF FLYING OBJECTS TRAVELING NE-NW ALONG THE COAST IVO 39RVM8. TRACKING THIS FORMATION FOR APPROXIMATELY 2 MINUTES BEFORE PID WAS LOST.",pages:7,size:"877 KB",created:"2026-05-05",producer:"Paper Capture",xref:2,jbig2:false,ocg:false},
+{id:"D62",intId:"DoW-UAP-D38",fname:"d62-mission-report-strait-of-hormuz-september-2020",series:2,batch:"26-0028",date:"Sep 2020",dateSort:20200915,theater:"Persian Gulf",location:"Strait of Hormuz",aircraft:"MQ-9 / 482 ATKS",sensor:"FMV",tag:"UNRESOLVED",tagLabel:"Unresolved",quote:"AT 1732Z, OBSERVED A UAP IVO 39RVM51.",pages:9,size:"1.0 MB",created:"2026-05-06",producer:"Paper Capture",xref:2,jbig2:false,ocg:false},
+{id:"D63",intId:"DoW-UAP-D39",fname:"d63-mission-report-strait-of-hormuz-october-2020",series:2,batch:"26-0028",date:"Oct 1, 2020",dateSort:20201001,theater:"Persian Gulf",location:"Strait of Hormuz",aircraft:"MQ-9 / 482 ATKS",sensor:"FMV",tag:"UNRESOLVED",tagLabel:"Unresolved",quote:"At 1829Z observed 1X UAP. Same mission logged 5 Iranian Air Defense GUARDCALL events, all professional/directive tone, no mission impact. Observation form not fully recovered in OCR.",pages:8,size:"3.3 MB",created:"2026-05-06",producer:"Born-digital",xref:2,jbig2:false,ocg:false},
+{id:"D64",intId:"DoW-UAP-D40",fname:"d64-mission-report-iran-november-2020",series:2,batch:"26-0028",date:"Nov 2, 2020",dateSort:20201102,theater:"Persian Gulf",location:"Iran",aircraft:"MQ-9 / 482 ATKS",sensor:"FMV",tag:"UNRESOLVED",tagLabel:"Unresolved",quote:"TWO UAPs. At 2143Z observed 1X UNIDENTIFIED AERIAL PHENOMENON IVO 39RWK, altitude unknown, bearing 080T. At 2148Z observed a second UAP.",pages:7,size:"861 KB",created:"2026-05-06",producer:"Paper Capture",xref:2,jbig2:false,ocg:false},
+{id:"D65",intId:"DoW-UAP-D41",fname:"d65-mission-report-persian-gulf-july-2020",series:2,batch:"26-0028",date:"Jul 16, 2020",dateSort:20200716,theater:"Persian Gulf",location:"Persian Gulf (29.25N, 49.58E)",aircraft:"MQ-9 / 482 ATKS",sensor:"FMV",tag:"UNRESOLVED",tagLabel:"Three UAPs",quote:"THREE UAPs same mission. (1830Z) IVO 39RVM, FL200, 98 KIAS. (1920Z) IVO 39RUN, FL190, 90 KIAS. (2345Z) IVO 39RUN6234236874 (unredacted = 29.253N, 49.583E), FL191, 115 KIAS. All FMV, weather not a factor.",pages:8,size:"3.0 MB",created:"2026-05-06",producer:"Born-digital",xref:2,jbig2:false,ocg:false},
+{id:"D74",intId:"DoW-UAP-D42",fname:"d74-mission-report-syria-november-2023",series:2,batch:"26-0028",date:"Nov 2023",dateSort:20231115,theater:"Iraq/Syria",location:"Syria",aircraft:"MQ-9",sensor:"FMV",tag:"UNRESOLVED",tagLabel:"Bouncy Ball UAP",quote:"WHILE RTB AT 2153Z, OBSERVED 1X PROB HC UAP SHAPED AS A BOUNCY BALL COME FROM THE SOUTH AT NEAR CO-ALT. UAP DROPPED ALTITUDE AND SAFELY PASS THEIR AIRCRAFT MAINTAINING approx 424KN. AFTER 7MIN OF WATCHING, UAP BECAME OUT OF RANGE.",pages:10,size:"719 KB",created:"2025-05-16",producer:"Born-digital",xref:2,jbig2:false,ocg:true},
+{id:"D75",intId:"DoW-UAP-D43",fname:"d75-mission-report-gulf-of-aden-july-2024",series:2,batch:"26-0028",date:"Jul 14, 2024",dateSort:20240714,theater:"Other",location:"Gulf of Aden",aircraft:"MQ-9",sensor:"FMV",tag:"BENIGN",tagLabel:"Benign (operator)",quote:"OBSERVED 1X UAP AT 140517ZJUL24 IVO 38PMT53DD17. STRAIGHT FLIGHT PATH AT SAME ALTITUDE. Observer assessment: Benign.",pages:8,size:"792 KB",created:"2025-05-16",producer:"Paper Capture",xref:2,jbig2:false,ocg:true}
+];
+
+// Safe DOM construction helper
+function el(tag, props, children) {
+  const node = document.createElement(tag);
+  if (props) {
+    if (props.cls) node.className = props.cls;
+    if (props.text) node.textContent = props.text;
+    if (props.title) node.title = props.title;
+    if (props.dataset) Object.keys(props.dataset).forEach(k => node.dataset[k] = props.dataset[k]);
+    if (props.style) Object.keys(props.style).forEach(k => node.style[k] = props.style[k]);
+    if (props.attrs) Object.keys(props.attrs).forEach(k => node.setAttribute(k, props.attrs[k]));
+  }
+  if (children) children.forEach(c => { if (c) node.appendChild(c); });
+  return node;
+}
+
+// === RENUMBER VISUALIZER ===
+const series2Reports = REPORTS.filter(r => r.series === 2);
+const leftCol = document.getElementById('renumber-left');
+const rightCol = document.getElementById('renumber-right');
+series2Reports.forEach(r => {
+  const cls = 'renumber-row' + (r.collision ? ' collision' : '');
+  const leftRow = el('div', {cls, dataset: {id: r.id}}, [
+    el('span', {text: r.id}),
+    el('span', {cls: 'filename', text: r.fname.replace(/^d\d+-/, '')})
+  ]);
+  const rightRow = el('div', {cls, dataset: {id: r.id}}, [
+    el('span', {text: r.intId}),
+    el('span', {cls: 'filename', text: r.location})
+  ]);
+  leftCol.appendChild(leftRow);
+  rightCol.appendChild(rightRow);
+});
+
+// Hover sync between columns
+document.querySelectorAll('.renumber-row').forEach(row => {
+  row.addEventListener('mouseenter', () => {
+    const id = row.dataset.id;
+    document.querySelectorAll('.renumber-row[data-id="' + id + '"]').forEach(e => e.style.background = 'var(--surface-3)');
+  });
+  row.addEventListener('mouseleave', () => {
+    const id = row.dataset.id;
+    document.querySelectorAll('.renumber-row[data-id="' + id + '"]').forEach(e => e.style.background = '');
+  });
+});
+
+// === GAP GRID ===
+const present = new Set(REPORTS.map(r => parseInt(r.id.slice(1))));
+const nonUAP = new Set(REPORTS.filter(r => r.isNonUAP).map(r => parseInt(r.id.slice(1))));
+const reservedBlock = new Set([66,67,68,69,70,71,72,73]);
+const grid = document.getElementById('gapGrid');
+const tooltip = document.getElementById('gapTooltip');
+
+for (let i = 1; i <= 75; i++) {
+  let cls = 'gap-cell', info = null;
+  if (nonUAP.has(i)) {
+    cls += ' nonuap';
+    const r = REPORTS.find(x => parseInt(x.id.slice(1)) === i);
+    info = {title: 'D' + i + ' · NOT UAP', body: r.location + ' · ' + r.date + ' · ' + r.tagLabel};
+  } else if (present.has(i)) {
+    cls += ' uap';
+    const r = REPORTS.find(x => parseInt(x.id.slice(1)) === i);
+    info = {title: 'D' + i, body: r.location + ' · ' + r.date + ' · ' + r.tagLabel};
+  } else if (reservedBlock.has(i)) {
+    cls += ' reserved-block';
+    info = {title: 'D' + i + ' · RESERVED', body: 'Part of the continuous D66-D73 block. No file in this release; likely held for a future MDR cycle.'};
+  } else {
+    cls += ' gap';
+    info = {title: 'D' + i + ' · ABSENT', body: 'Slot not filled in this release.'};
+  }
+  const cell = el('div', {cls, text: i.toString()});
+  cell.addEventListener('mouseenter', () => {
+    tooltip.replaceChildren(
+      el('strong', {text: info.title}),
+      document.createTextNode(info.body)
+    );
+    tooltip.classList.add('active');
+  });
+  cell.addEventListener('mousemove', e => {
+    tooltip.style.left = (e.clientX + 14) + 'px';
+    tooltip.style.top = (e.clientY + 14) + 'px';
+  });
+  cell.addEventListener('mouseleave', () => tooltip.classList.remove('active'));
+  grid.appendChild(cell);
+}
+
+// === EXPLORER ===
+let activeFilters = { theater: 'all', tag: 'all', search: '' };
+let sortKey = 'id', sortDir = 1;
+
+function makeFlagPill(text, kind) {
+  return el('span', {cls: 'flag-pill ' + (kind || ''), text: text});
+}
+
+function makeRow(r) {
+  const idCls = 'row-id' + (r.isNonUAP ? ' non-uap' : '') + ((r.metaError || r.collision) ? ' alert' : '');
+  const locNode = el('span', {cls: 'row-loc'}, [
+    document.createTextNode(r.location)
+  ]);
+  if (r.metaError) {
+    locNode.appendChild(el('span', {cls: 'err', text: 'meta-err: title says "Southern US, 2020"'}));
+  }
+
+  const row = el('div', {cls: 'explorer-row', dataset: {id: r.id}}, [
+    el('span', {cls: idCls, text: r.id}),
+    el('span', {cls: 'row-date', text: r.date}),
+    locNode,
+    el('span', {cls: 'row-aircraft', text: r.aircraft}),
+    el('span', {cls: 'row-sensor', text: r.sensor}),
+    el('span', {}, [el('span', {cls: 'row-tag tag-' + r.tag, text: r.tagLabel})]),
+    el('span', {cls: 'row-chevron', text: '▸'})
+  ]);
+
+  const flags = [];
+  if (r.isNonUAP) flags.push(makeFlagPill('NOT UAP', 'bad'));
+  if (r.jbig2) flags.push(makeFlagPill('JBIG2 risk', 'warn'));
+  if (r.ocg) flags.push(makeFlagPill('OCG layers'));
+  if (r.collision) flags.push(makeFlagPill('ID collision', 'bad'));
+  if (r.metaError) flags.push(makeFlagPill('meta error', 'bad'));
+  if (r.videoRef) flags.push(makeFlagPill('video: ' + r.videoRef, 'warn'));
+
+  const detail = el('div', {cls: 'row-detail'}, [
+    el('div', {cls: 'detail-block'}, [
+      el('h5', {text: "Operator's Language"}),
+      el('p', {cls: 'quote', text: r.quote}),
+      el('div', {cls: 'detail-flags'}, flags)
+    ]),
+    (() => {
+      const meta = el('div', {cls: 'detail-meta'});
+      const rows = [
+        ['Filename', r.fname + '.pdf'],
+        ['Internal Title', r.intId, (r.collision || r.intId.includes('truncated')) ? 'alert' : ''],
+        ['MDR Batch', r.batch],
+        ['Pages', r.pages + ' · ' + r.size],
+        ['Created', r.created],
+        ['Producer', r.producer],
+        ['xref tables', r.xref + ' ' + (r.xref === 1 ? '(pristine)' : r.xref === 2 ? '(1 update)' : r.xref === 3 ? '(2 updates)' : '(3 updates)')]
+      ];
+      rows.forEach(([k, v, valCls]) => {
+        const wrap = el('div', {cls: 'row'}, [
+          el('span', {cls: 'key', text: k + ': '}),
+          el('span', {cls: 'val ' + (valCls || ''), text: v})
+        ]);
+        meta.appendChild(wrap);
+      });
+      return el('div', {cls: 'detail-block'}, [
+        el('h5', {text: 'File Metadata'}),
+        meta
+      ]);
+    })()
+  ]);
+
+  row.addEventListener('click', () => {
+    const isOpen = detail.classList.contains('open');
+    document.querySelectorAll('.row-detail.open').forEach(d => d.classList.remove('open'));
+    document.querySelectorAll('.explorer-row.expanded').forEach(e => e.classList.remove('expanded'));
+    if (!isOpen) {
+      detail.classList.add('open');
+      row.classList.add('expanded');
+    }
+  });
+
+  return [row, detail];
+}
+
+function renderExplorer() {
+  let rows = REPORTS.slice();
+  if (activeFilters.theater !== 'all') rows = rows.filter(r => r.theater === activeFilters.theater);
+  if (activeFilters.tag !== 'all') rows = rows.filter(r => r.tag === activeFilters.tag);
+  if (activeFilters.search) {
+    const q = activeFilters.search.toLowerCase();
+    rows = rows.filter(r =>
+      r.id.toLowerCase().includes(q) ||
+      r.location.toLowerCase().includes(q) ||
+      r.sensor.toLowerCase().includes(q) ||
+      r.aircraft.toLowerCase().includes(q) ||
+      r.quote.toLowerCase().includes(q) ||
+      r.tagLabel.toLowerCase().includes(q)
+    );
+  }
+  rows.sort((a, b) => {
+    let av, bv;
+    if (sortKey === 'id') { av = parseInt(a.id.slice(1)); bv = parseInt(b.id.slice(1)); }
+    else if (sortKey === 'date') { av = a.dateSort; bv = b.dateSort; }
+    else { av = (a[sortKey] || '').toString().toLowerCase(); bv = (b[sortKey] || '').toString().toLowerCase(); }
+    return av < bv ? -sortDir : av > bv ? sortDir : 0;
+  });
+
+  const body = document.getElementById('explorerBody');
+  body.replaceChildren();
+  rows.forEach(r => {
+    const [row, detail] = makeRow(r);
+    body.appendChild(row);
+    body.appendChild(detail);
+  });
+}
+renderExplorer();
+
+document.querySelectorAll('.chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    const f = chip.dataset.filter, v = chip.dataset.value;
+    activeFilters[f] = v;
+    document.querySelectorAll('.chip[data-filter="' + f + '"]').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    renderExplorer();
+  });
+});
+document.getElementById('searchInput').addEventListener('input', e => {
+  activeFilters.search = e.target.value;
+  renderExplorer();
+});
+document.querySelectorAll('.explorer-header .sortable').forEach(h => {
+  h.addEventListener('click', () => {
+    const k = h.dataset.sort;
+    if (sortKey === k) sortDir = -sortDir;
+    else { sortKey = k; sortDir = 1; }
+    document.querySelectorAll('.explorer-header span').forEach(s => s.classList.remove('sorted'));
+    h.classList.add('sorted');
+    renderExplorer();
+  });
+});
+
+// === TIMELINE ===
+(function renderTimeline() {
+  const tl = document.getElementById('timeline');
+  const startYear = 1958, endYear = 2027;
+  const range = endYear - startYear;
+  const pct = y => ((y - startYear) / range) * 100;
+
+  // Axis
+  const axis = el('div', {cls: 'timeline-axis'});
+  [1960, 1970, 1980, 1990, 2000, 2010, 2020, 2026].forEach(y => {
+    axis.appendChild(el('div', {cls: 'tl-year', text: y.toString(), style: {left: pct(y) + '%'}}));
+  });
+  tl.appendChild(axis);
+
+  // Lane 1: reference docs
+  const lane1 = el('div', {cls: 'tl-lane'});
+  lane1.appendChild(el('span', {cls: 'tl-lane-label', text: 'Reference', style: {left: '-20px'}}));
+  lane1.appendChild(el('div', {cls: 'tl-bar', style: {left: pct(1958)+'%', width: (pct(2000)-pct(1958))+'%'}, title: 'D49 Vandenberg Launch Summary range 1958-2000'}));
+  lane1.appendChild(el('div', {cls: 'tl-event nonuap', style: {left: pct(1996.7)+'%'}, title: 'D48: RTI Booster Failure study (Sep 1996)'}));
+  lane1.appendChild(el('div', {cls: 'tl-event nonuap', style: {left: pct(2000.1)+'%'}, title: 'D49: Vandenberg Launch Summary publication (Feb 2000)'}));
+  tl.appendChild(lane1);
+
+  // Lane 2: UAP events
+  const lane2 = el('div', {cls: 'tl-lane'});
+  lane2.appendChild(el('span', {cls: 'tl-lane-label', text: 'UAP events', style: {left: '-20px'}}));
+  REPORTS.filter(r => !r.isNonUAP).forEach(r => {
+    const yr = parseInt(r.dateSort.toString().slice(0, 4));
+    const mo = parseInt(r.dateSort.toString().slice(4, 6)) || 6;
+    const decimal = yr + mo / 12;
+    lane2.appendChild(el('div', {cls: 'tl-event', style: {left: pct(decimal)+'%'}, title: r.id + ': ' + r.location + ' (' + r.date + ')'}));
+  });
+  tl.appendChild(lane2);
+
+  // Lane 3: batch dates
+  const lane3 = el('div', {cls: 'tl-lane'});
+  lane3.appendChild(el('span', {cls: 'tl-lane-label', text: 'Released', style: {left: '-20px'}}));
+  lane3.appendChild(el('div', {cls: 'tl-event batch', style: {left: pct(2026.34)+'%'}, title: 'May 6-7, 2026: All 41 files encrypted and finalized in two consecutive evening batches'}));
+  tl.appendChild(lane3);
+})();
+
+// === NAV ACTIVE STATE ===
+const navLinks = document.querySelectorAll('.toc a');
+const sections = document.querySelectorAll('main section');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const link = document.querySelector('.toc a[href="#' + e.target.id + '"]');
+      if (link) link.classList.add('active');
+    }
+  });
+}, { threshold: 0.3, rootMargin: '-100px 0px -50% 0px' });
+sections.forEach(s => obs.observe(s));
+</script>
+
+</body>
+</html>
