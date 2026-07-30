@@ -1,0 +1,800 @@
+{
+ "source": {
+  "retrospective": "noaa-nwm-retrospective-3-0-pds/CONUS/zarr/chrtout.zarr (NWM v3.0, hourly, 1979-02 to ~2023-02)",
+  "operational": "noaa-nwm-pds/nwm.YYYYMMDD/analysis_assim/*.channel_rt.tm00.conus.nc",
+  "note": "National Water Model output. Assimilates USGS gauges but is MODEL OUTPUT, not observation. Absolute magnitudes are less reliable than shapes and ratios; NWM smooths intense convective rainfall.",
+  "matching": "NHD named reaches matched to NWM feature_id by nearest lat/lon with exclusive assignment per creek, then highest stream order / lowest elevation"
+ },
+ "reach_match": {
+  "Stockport Creek": {
+   "feature_id": 6193928,
+   "order": 5,
+   "dist_m": 115.9,
+   "elev_m": 0.0,
+   "lat": 42.31152,
+   "lon": -73.77636,
+   "n_exclusive": 3,
+   "global_index": 650805
+  },
+  "Kinderhook Creek": {
+   "feature_id": 6188948,
+   "order": 4,
+   "dist_m": 53.1,
+   "elev_m": 58.7,
+   "lat": 42.36665,
+   "lon": -73.72574,
+   "n_exclusive": 9,
+   "global_index": 650345
+  },
+  "Claverack Creek": {
+   "feature_id": 6188426,
+   "order": 4,
+   "dist_m": 33.5,
+   "elev_m": 8.0,
+   "lat": 42.31507,
+   "lon": -73.74457,
+   "n_exclusive": 8,
+   "global_index": 650106
+  },
+  "Agawamuck Creek": {
+   "feature_id": 166177594,
+   "order": 2,
+   "dist_m": 251.7,
+   "elev_m": 149.1,
+   "lat": 42.25049,
+   "lon": -73.65575,
+   "n_exclusive": 9,
+   "global_index": 2684442
+  },
+  "Taghkanic Creek": {
+   "feature_id": 6188550,
+   "order": 3,
+   "dist_m": 19.3,
+   "elev_m": 40.1,
+   "lat": 42.21931,
+   "lon": -73.75335,
+   "n_exclusive": 11,
+   "global_index": 650168
+  },
+  "Hudson River": {
+   "feature_id": 6189104,
+   "order": 7,
+   "dist_m": 216.9,
+   "elev_m": 0.0,
+   "lat": 42.39935,
+   "lon": -73.78492,
+   "n_exclusive": 16,
+   "global_index": 650419
+  }
+ },
+ "event_2026": {
+  "dates": "29-30 July 2026",
+  "county_state_of_emergency": "effective 10:00 EDT 29 July 2026 (Columbia County)",
+  "record_ends": "2026-07-30T00:00:00Z - later analysis_assim files unpublished at run time; all peaks are lower bounds",
+  "summary": {
+   "Stockport Creek": {
+    "baseline_m3s": 4.57,
+    "peak_m3s": 319.59,
+    "ratio": 69.9,
+    "peak_time_utc": "2026-07-30T00:00:00",
+    "still_rising_at_end": true
+   },
+   "Kinderhook Creek": {
+    "baseline_m3s": 3.17,
+    "peak_m3s": 190.01,
+    "ratio": 59.9,
+    "peak_time_utc": "2026-07-30T00:00:00",
+    "still_rising_at_end": true
+   },
+   "Claverack Creek": {
+    "baseline_m3s": 1.38,
+    "peak_m3s": 149.09,
+    "ratio": 108.0,
+    "peak_time_utc": "2026-07-30T00:00:00",
+    "still_rising_at_end": true
+   },
+   "Agawamuck Creek": {
+    "baseline_m3s": 0.13,
+    "peak_m3s": 45.02,
+    "ratio": 346.3,
+    "peak_time_utc": "2026-07-29T21:00:00",
+    "still_rising_at_end": false
+   },
+   "Taghkanic Creek": {
+    "baseline_m3s": 0.64,
+    "peak_m3s": 20.58,
+    "ratio": 32.2,
+    "peak_time_utc": "2026-07-30T00:00:00",
+    "still_rising_at_end": true
+   },
+   "Hudson River": {
+    "baseline_m3s": 117.43,
+    "peak_m3s": 151.91,
+    "ratio": 1.3,
+    "peak_time_utc": "2026-07-30T00:00:00",
+    "still_rising_at_end": true
+   }
+  },
+  "timesteps": [
+   [
+    "2026-07-26T00:00:00",
+    {
+     "Stockport Creek": 4.57,
+     "Kinderhook Creek": 3.17,
+     "Claverack Creek": 1.38,
+     "Agawamuck Creek": 0.13,
+     "Taghkanic Creek": 0.64,
+     "Hudson River": 117.43
+    }
+   ],
+   [
+    "2026-07-26T03:00:00",
+    {
+     "Stockport Creek": 4.53,
+     "Kinderhook Creek": 3.03,
+     "Claverack Creek": 1.38,
+     "Agawamuck Creek": 0.13,
+     "Taghkanic Creek": 0.64,
+     "Hudson River": 115.5
+    }
+   ],
+   [
+    "2026-07-26T06:00:00",
+    {
+     "Stockport Creek": 4.47,
+     "Kinderhook Creek": 2.97,
+     "Claverack Creek": 1.38,
+     "Agawamuck Creek": 0.13,
+     "Taghkanic Creek": 0.64,
+     "Hudson River": 113.48
+    }
+   ],
+   [
+    "2026-07-26T09:00:00",
+    {
+     "Stockport Creek": 4.41,
+     "Kinderhook Creek": 2.97,
+     "Claverack Creek": 1.38,
+     "Agawamuck Creek": 0.13,
+     "Taghkanic Creek": 0.64,
+     "Hudson River": 111.54
+    }
+   ],
+   [
+    "2026-07-26T12:00:00",
+    {
+     "Stockport Creek": 4.36,
+     "Kinderhook Creek": 2.92,
+     "Claverack Creek": 1.38,
+     "Agawamuck Creek": 0.13,
+     "Taghkanic Creek": 0.64,
+     "Hudson River": 109.9
+    }
+   ],
+   [
+    "2026-07-26T15:00:00",
+    {
+     "Stockport Creek": 4.31,
+     "Kinderhook Creek": 2.86,
+     "Claverack Creek": 1.38,
+     "Agawamuck Creek": 0.13,
+     "Taghkanic Creek": 0.64,
+     "Hudson River": 108.66
+    }
+   ],
+   [
+    "2026-07-26T18:00:00",
+    {
+     "Stockport Creek": 4.27,
+     "Kinderhook Creek": 2.8,
+     "Claverack Creek": 1.37,
+     "Agawamuck Creek": 0.13,
+     "Taghkanic Creek": 0.63,
+     "Hudson River": 107.8
+    }
+   ],
+   [
+    "2026-07-26T21:00:00",
+    {
+     "Stockport Creek": 4.23,
+     "Kinderhook Creek": 2.8,
+     "Claverack Creek": 1.37,
+     "Agawamuck Creek": 0.13,
+     "Taghkanic Creek": 0.63,
+     "Hudson River": 107.11
+    }
+   ],
+   [
+    "2026-07-27T00:00:00",
+    {
+     "Stockport Creek": 4.18,
+     "Kinderhook Creek": 2.74,
+     "Claverack Creek": 1.37,
+     "Agawamuck Creek": 0.13,
+     "Taghkanic Creek": 0.63,
+     "Hudson River": 106.37
+    }
+   ],
+   [
+    "2026-07-27T03:00:00",
+    {
+     "Stockport Creek": 4.13,
+     "Kinderhook Creek": 2.68,
+     "Claverack Creek": 1.37,
+     "Agawamuck Creek": 0.13,
+     "Taghkanic Creek": 0.63,
+     "Hudson River": 105.45
+    }
+   ],
+   [
+    "2026-07-27T06:00:00",
+    {
+     "Stockport Creek": 4.09,
+     "Kinderhook Creek": 2.63,
+     "Claverack Creek": 1.37,
+     "Agawamuck Creek": 0.13,
+     "Taghkanic Creek": 0.63,
+     "Hudson River": 104.36
+    }
+   ],
+   [
+    "2026-07-27T09:00:00",
+    {
+     "Stockport Creek": 4.04,
+     "Kinderhook Creek": 2.57,
+     "Claverack Creek": 1.36,
+     "Agawamuck Creek": 0.13,
+     "Taghkanic Creek": 0.63,
+     "Hudson River": 103.27
+    }
+   ],
+   [
+    "2026-07-27T12:00:00",
+    {
+     "Stockport Creek": 3.99,
+     "Kinderhook Creek": 2.57,
+     "Claverack Creek": 1.36,
+     "Agawamuck Creek": 0.13,
+     "Taghkanic Creek": 0.63,
+     "Hudson River": 102.42
+    }
+   ],
+   [
+    "2026-07-27T15:00:00",
+    {
+     "Stockport Creek": 3.96,
+     "Kinderhook Creek": 2.52,
+     "Claverack Creek": 1.36,
+     "Agawamuck Creek": 0.13,
+     "Taghkanic Creek": 0.63,
+     "Hudson River": 101.99
+    }
+   ],
+   [
+    "2026-07-27T18:00:00",
+    {
+     "Stockport Creek": 4.07,
+     "Kinderhook Creek": 2.97,
+     "Claverack Creek": 1.36,
+     "Agawamuck Creek": 0.13,
+     "Taghkanic Creek": 0.63,
+     "Hudson River": 102.03
+    }
+   ],
+   [
+    "2026-07-27T21:00:00",
+    {
+     "Stockport Creek": 3.87,
+     "Kinderhook Creek": 2.01,
+     "Claverack Creek": 1.36,
+     "Agawamuck Creek": 0.13,
+     "Taghkanic Creek": 0.63,
+     "Hudson River": 102.45
+    }
+   ],
+   [
+    "2026-07-28T00:00:00",
+    {
+     "Stockport Creek": 3.73,
+     "Kinderhook Creek": 2.41,
+     "Claverack Creek": 1.35,
+     "Agawamuck Creek": 0.13,
+     "Taghkanic Creek": 0.62,
+     "Hudson River": 103.09
+    }
+   ],
+   [
+    "2026-07-28T03:00:00",
+    {
+     "Stockport Creek": 3.76,
+     "Kinderhook Creek": 2.41,
+     "Claverack Creek": 1.35,
+     "Agawamuck Creek": 0.13,
+     "Taghkanic Creek": 0.62,
+     "Hudson River": 103.8
+    }
+   ],
+   [
+    "2026-07-28T06:00:00",
+    {
+     "Stockport Creek": 3.76,
+     "Kinderhook Creek": 2.36,
+     "Claverack Creek": 1.35,
+     "Agawamuck Creek": 0.13,
+     "Taghkanic Creek": 0.62,
+     "Hudson River": 104.5
+    }
+   ],
+   [
+    "2026-07-28T09:00:00",
+    {
+     "Stockport Creek": 3.74,
+     "Kinderhook Creek": 2.31,
+     "Claverack Creek": 1.35,
+     "Agawamuck Creek": 0.13,
+     "Taghkanic Creek": 0.62,
+     "Hudson River": 105.25
+    }
+   ],
+   [
+    "2026-07-28T12:00:00",
+    {
+     "Stockport Creek": 3.71,
+     "Kinderhook Creek": 2.31,
+     "Claverack Creek": 1.35,
+     "Agawamuck Creek": 0.13,
+     "Taghkanic Creek": 0.62,
+     "Hudson River": 106.12
+    }
+   ],
+   [
+    "2026-07-28T15:00:00",
+    {
+     "Stockport Creek": 3.69,
+     "Kinderhook Creek": 2.31,
+     "Claverack Creek": 1.35,
+     "Agawamuck Creek": 0.13,
+     "Taghkanic Creek": 0.62,
+     "Hudson River": 107.11
+    }
+   ],
+   [
+    "2026-07-28T18:00:00",
+    {
+     "Stockport Creek": 3.79,
+     "Kinderhook Creek": 2.57,
+     "Claverack Creek": 1.34,
+     "Agawamuck Creek": 0.13,
+     "Taghkanic Creek": 0.62,
+     "Hudson River": 108.11
+    }
+   ],
+   [
+    "2026-07-28T21:00:00",
+    {
+     "Stockport Creek": 3.69,
+     "Kinderhook Creek": 2.45,
+     "Claverack Creek": 1.86,
+     "Agawamuck Creek": 0.13,
+     "Taghkanic Creek": 0.62,
+     "Hudson River": 108.9
+    }
+   ],
+   [
+    "2026-07-29T00:00:00",
+    {
+     "Stockport Creek": 4.3,
+     "Kinderhook Creek": 3.18,
+     "Claverack Creek": 1.59,
+     "Agawamuck Creek": 0.13,
+     "Taghkanic Creek": 0.62,
+     "Hudson River": 109.24
+    }
+   ],
+   [
+    "2026-07-29T03:00:00",
+    {
+     "Stockport Creek": 5.44,
+     "Kinderhook Creek": 4.06,
+     "Claverack Creek": 3.62,
+     "Agawamuck Creek": 0.13,
+     "Taghkanic Creek": 0.69,
+     "Hudson River": 108.95
+    }
+   ],
+   [
+    "2026-07-29T06:00:00",
+    {
+     "Stockport Creek": 7.85,
+     "Kinderhook Creek": 12.05,
+     "Claverack Creek": 3.72,
+     "Agawamuck Creek": 0.13,
+     "Taghkanic Creek": 0.7,
+     "Hudson River": 108.01
+    }
+   ],
+   [
+    "2026-07-29T09:00:00",
+    {
+     "Stockport Creek": 20.49,
+     "Kinderhook Creek": 23.16,
+     "Claverack Creek": 10.21,
+     "Agawamuck Creek": 0.16,
+     "Taghkanic Creek": 1.14,
+     "Hudson River": 106.55
+    }
+   ],
+   [
+    "2026-07-29T12:00:00",
+    {
+     "Stockport Creek": 72.78,
+     "Kinderhook Creek": 57.91,
+     "Claverack Creek": 44.58,
+     "Agawamuck Creek": 2.73,
+     "Taghkanic Creek": 2.08,
+     "Hudson River": 106.37
+    }
+   ],
+   [
+    "2026-07-29T15:00:00",
+    {
+     "Stockport Creek": 115.16,
+     "Kinderhook Creek": 77.65,
+     "Claverack Creek": 44.4,
+     "Agawamuck Creek": 6.85,
+     "Taghkanic Creek": 3.55,
+     "Hudson River": 110.28
+    }
+   ],
+   [
+    "2026-07-29T18:00:00",
+    {
+     "Stockport Creek": 166.69,
+     "Kinderhook Creek": 118.05,
+     "Claverack Creek": 83.88,
+     "Agawamuck Creek": 40.4,
+     "Taghkanic Creek": 8.58,
+     "Hudson River": 118.27
+    }
+   ],
+   [
+    "2026-07-29T21:00:00",
+    {
+     "Stockport Creek": 239.63,
+     "Kinderhook Creek": 152.06,
+     "Claverack Creek": 119.16,
+     "Agawamuck Creek": 45.02,
+     "Taghkanic Creek": 17.71,
+     "Hudson River": 129.57
+    }
+   ],
+   [
+    "2026-07-30T00:00:00",
+    {
+     "Stockport Creek": 319.59,
+     "Kinderhook Creek": 190.01,
+     "Claverack Creek": 149.09,
+     "Agawamuck Creek": 38.03,
+     "Taghkanic Creek": 20.58,
+     "Hudson River": 151.91
+    }
+   ]
+  ]
+ },
+ "historical_peaks_m3s": {
+  "Jan 1996 snowmelt+rain": {
+   "Stockport Creek": {
+    "peak_m3s": 470.94,
+    "peak_time": "1996-01-20T02:00:00",
+    "window": [
+     "1996-01-11",
+     "1996-02-08"
+    ]
+   },
+   "Kinderhook Creek": {
+    "peak_m3s": 275.87,
+    "peak_time": "1996-01-20T12:00:00",
+    "window": [
+     "1996-01-11",
+     "1996-02-08"
+    ]
+   },
+   "Claverack Creek": {
+    "peak_m3s": 403.05,
+    "peak_time": "1996-01-20T01:00:00",
+    "window": [
+     "1996-01-11",
+     "1996-02-08"
+    ]
+   },
+   "Taghkanic Creek": {
+    "peak_m3s": 222.25,
+    "peak_time": "1996-01-19T23:00:00",
+    "window": [
+     "1996-01-11",
+     "1996-02-08"
+    ]
+   },
+   "Hudson River": {
+    "peak_m3s": 2220.15,
+    "peak_time": "1996-01-23T02:00:00",
+    "window": [
+     "1996-01-11",
+     "1996-02-08"
+    ]
+   },
+   "Agawamuck Creek": {
+    "peak_m3s": 85.45,
+    "peak_time": "1996-01-19T23:00:00",
+    "window": [
+     "1996-01-11",
+     "1996-02-08"
+    ]
+   }
+  },
+  "TS Floyd 1999": {
+   "Stockport Creek": {
+    "peak_m3s": 567.62,
+    "peak_time": "1999-09-17T14:00:00",
+    "window": [
+     "1999-09-16",
+     "1999-10-14"
+    ]
+   },
+   "Kinderhook Creek": {
+    "peak_m3s": 554.29,
+    "peak_time": "1999-09-17T13:00:00",
+    "window": [
+     "1999-09-16",
+     "1999-10-14"
+    ]
+   },
+   "Claverack Creek": {
+    "peak_m3s": 20.23,
+    "peak_time": "1999-09-17T02:00:00",
+    "window": [
+     "1999-09-16",
+     "1999-10-14"
+    ]
+   },
+   "Taghkanic Creek": {
+    "peak_m3s": 4.61,
+    "peak_time": "1999-09-17T10:00:00",
+    "window": [
+     "1999-09-16",
+     "1999-10-14"
+    ]
+   },
+   "Hudson River": {
+    "peak_m3s": 1129.97,
+    "peak_time": "1999-09-21T02:00:00",
+    "window": [
+     "1999-09-16",
+     "1999-10-14"
+    ]
+   },
+   "Agawamuck Creek": {
+    "peak_m3s": 9.47,
+    "peak_time": "1999-09-17T11:00:00",
+    "window": [
+     "1999-09-16",
+     "1999-10-14"
+    ]
+   }
+  },
+  "Apr 2005": {
+   "Stockport Creek": {
+    "peak_m3s": 228.81,
+    "peak_time": "2005-03-29T22:00:00",
+    "window": [
+     "2005-03-24",
+     "2005-04-21"
+    ]
+   },
+   "Kinderhook Creek": {
+    "peak_m3s": 158.54,
+    "peak_time": "2005-03-30T06:00:00",
+    "window": [
+     "2005-03-24",
+     "2005-04-21"
+    ]
+   },
+   "Claverack Creek": {
+    "peak_m3s": 98.94,
+    "peak_time": "2005-03-29T19:00:00",
+    "window": [
+     "2005-03-24",
+     "2005-04-21"
+    ]
+   },
+   "Taghkanic Creek": {
+    "peak_m3s": 55.03,
+    "peak_time": "2005-03-29T18:00:00",
+    "window": [
+     "2005-03-24",
+     "2005-04-21"
+    ]
+   },
+   "Hudson River": {
+    "peak_m3s": 2378.93,
+    "peak_time": "2005-04-06T05:00:00",
+    "window": [
+     "2005-03-24",
+     "2005-04-21"
+    ]
+   },
+   "Agawamuck Creek": {
+    "peak_m3s": 19.23,
+    "peak_time": "2005-03-29T14:00:00",
+    "window": [
+     "2005-03-24",
+     "2005-04-21"
+    ]
+   }
+  },
+  "TS Irene 2011": {
+   "Stockport Creek": {
+    "peak_m3s": 2020.9,
+    "peak_time": "2011-08-28T20:00:00",
+    "window": [
+     "2011-08-04",
+     "2011-09-01"
+    ]
+   },
+   "Kinderhook Creek": {
+    "peak_m3s": 1065.32,
+    "peak_time": "2011-08-28T21:00:00",
+    "window": [
+     "2011-08-04",
+     "2011-09-01"
+    ]
+   },
+   "Claverack Creek": {
+    "peak_m3s": 1038.42,
+    "peak_time": "2011-08-28T19:00:00",
+    "window": [
+     "2011-08-04",
+     "2011-09-01"
+    ]
+   },
+   "Taghkanic Creek": {
+    "peak_m3s": 570.74,
+    "peak_time": "2011-08-28T18:00:00",
+    "window": [
+     "2011-08-04",
+     "2011-09-01"
+    ]
+   },
+   "Hudson River": {
+    "peak_m3s": 5819.28,
+    "peak_time": "2011-08-30T14:00:00",
+    "window": [
+     "2011-08-04",
+     "2011-09-01"
+    ]
+   },
+   "Agawamuck Creek": {
+    "peak_m3s": 207.21,
+    "peak_time": "2011-08-28T17:00:00",
+    "window": [
+     "2011-08-04",
+     "2011-09-01"
+    ]
+   }
+  },
+  "TS Lee 2011": {
+   "Stockport Creek": {
+    "peak_m3s": 726.39,
+    "peak_time": "2011-09-07T14:00:00",
+    "window": [
+     "2011-09-01",
+     "2011-09-29"
+    ]
+   },
+   "Kinderhook Creek": {
+    "peak_m3s": 425.37,
+    "peak_time": "2011-09-07T17:00:00",
+    "window": [
+     "2011-09-01",
+     "2011-09-29"
+    ]
+   },
+   "Claverack Creek": {
+    "peak_m3s": 346.34,
+    "peak_time": "2011-09-07T13:00:00",
+    "window": [
+     "2011-09-01",
+     "2011-09-29"
+    ]
+   },
+   "Taghkanic Creek": {
+    "peak_m3s": 153.7,
+    "peak_time": "2011-09-07T12:00:00",
+    "window": [
+     "2011-09-01",
+     "2011-09-29"
+    ]
+   },
+   "Hudson River": {
+    "peak_m3s": 5646.5,
+    "peak_time": "2011-09-10T04:00:00",
+    "window": [
+     "2011-09-01",
+     "2011-09-29"
+    ]
+   },
+   "Agawamuck Creek": {
+    "peak_m3s": 60.59,
+    "peak_time": "2011-09-07T10:00:00",
+    "window": [
+     "2011-09-01",
+     "2011-09-29"
+    ]
+   }
+  },
+  "Halloween 2019": {
+   "Stockport Creek": {
+    "peak_m3s": 400.02,
+    "peak_time": "2019-10-18T05:00:00",
+    "window": [
+     "2019-10-17",
+     "2019-11-14"
+    ]
+   },
+   "Kinderhook Creek": {
+    "peak_m3s": 312.84,
+    "peak_time": "2019-10-18T06:00:00",
+    "window": [
+     "2019-10-17",
+     "2019-11-14"
+    ]
+   },
+   "Claverack Creek": {
+    "peak_m3s": 122.36,
+    "peak_time": "2019-10-17T23:00:00",
+    "window": [
+     "2019-10-17",
+     "2019-11-14"
+    ]
+   },
+   "Taghkanic Creek": {
+    "peak_m3s": 66.74,
+    "peak_time": "2019-10-17T22:00:00",
+    "window": [
+     "2019-10-17",
+     "2019-11-14"
+    ]
+   },
+   "Hudson River": {
+    "peak_m3s": 3004.28,
+    "peak_time": "2019-11-04T09:00:00",
+    "window": [
+     "2019-10-17",
+     "2019-11-14"
+    ]
+   },
+   "Agawamuck Creek": {
+    "peak_m3s": 35.69,
+    "peak_time": "2019-10-17T18:00:00",
+    "window": [
+     "2019-10-17",
+     "2019-11-14"
+    ]
+   }
+  }
+ },
+ "mass_balance": {
+  "at": "2026-07-30T00:00:00Z",
+  "kinderhook": 190.01,
+  "claverack": 149.09,
+  "sum": 339.1,
+  "stockport": 319.59,
+  "ratio_pct": 94,
+  "note": "6% deficit is water the 0.32 m/km outlet had not yet passed on"
+ },
+ "still_unobtainable": [
+  "FEMA National Flood Hazard Layer (regulatory zones) - Esri, FEMA and NY State GIS hosts all refused; no S3 mirror; NOAA OWP FIM bucket 403 on every key",
+  "observed USGS gauge stage/discharge",
+  "the 2026 event peak (record cut short mid-event)"
+ ]
+}
